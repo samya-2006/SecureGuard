@@ -15,7 +15,7 @@ public class Main {
 
         System.out.println("""
                 =========================================
-                          SecureGuard v0.1.0
+                          SecureGuard v1.0.0
                 =========================================
                 Cross-Language Security Scanner
                 
@@ -27,9 +27,15 @@ public class Main {
         FileScanner fileScanner = new FileScanner();
         RuleEngine ruleEngine = new RuleEngine();
 
-        File demoFolder = new File("src/main/resources/demo");
+        File scanFolder;
 
-        List<File> files = fileScanner.scanProject(demoFolder);
+        if (args.length > 0) {
+            scanFolder = new File(args[0]);
+        } else {
+            scanFolder = new File(".");
+        }
+
+        List<File> files = fileScanner.scanProject(scanFolder);
         int filesScanned = files.size();
         List<Issue> allIssues = new java.util.ArrayList<>();
 

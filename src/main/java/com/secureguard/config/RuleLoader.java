@@ -4,17 +4,13 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.secureguard.model.Rule;
 
-
-import java.io.File;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 public class RuleLoader {
 
-    public  List<Rule> loadRules() {
+    public List<Rule> loadRules() {
 
         try {
 
@@ -24,26 +20,23 @@ public class RuleLoader {
 
             ClassLoader classLoader = getClass().getClassLoader();
 
-            URL folderUrl = classLoader.getResource("rules");
+            for (int i = 1; i <= 10; i++) {
 
-            if (folderUrl == null) {
-                throw new RuntimeException("Rules folder not found.");
-            }
+                String resource = String.format("rules/SG%03d.json", i);
 
-            File folder = new File(folderUrl.toURI());
+                try (InputStream inputStream = classLoader.getResourceAsStream(resource)) {
 
-            File[] files = folder.listFiles((dir, name) -> name.endsWith(".json"));
+                    if (inputStream == null) {
+                        continue;
+                    }
 
-            if (files == null) {
-                return rules;
-            }
+                    List<Rule> loaded =
+                            mapper.readValue(inputStream, new TypeReference<List<Rule>>() {});
 
-            for (File file : files) {
+                    rules.addAll(loaded);
 
-                List<Rule> loaded =
-                        mapper.readValue(file, new TypeReference<List<Rule>>() {});
+                }
 
-                rules.addAll(loaded);
             }
 
             return rules;
