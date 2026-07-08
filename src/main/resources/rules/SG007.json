@@ -1,0 +1,190 @@
+[
+  {
+    "ruleId": "SG007",
+    "name": "Insecure Random Number Generator",
+    "severity": "HIGH",
+    "language": "JAVA",
+    "detectors": [
+      {
+        "name": "java.util.Random",
+        "regex": "new\\s+Random\\s*\\(",
+        "example": "Random random = new Random();",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "Math.random",
+        "regex": "Math\\.random\\s*\\(",
+        "example": "Math.random()",
+        "confidence": "HIGH"
+      }
+    ],
+    "description": "Predictable random number generator detected.",
+    "recommendation": "Use java.security.SecureRandom for security-sensitive operations."
+  },
+
+  {
+    "ruleId": "SG007",
+    "name": "Insecure Random Number Generator",
+    "severity": "HIGH",
+    "language": "PYTHON",
+    "detectors": [
+      {
+        "name": "random.randint",
+        "regex": "random\\.randint\\s*\\(",
+        "example": "random.randint(100000,999999)",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "random.random",
+        "regex": "random\\.random\\s*\\(",
+        "example": "random.random()",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "random.choice",
+        "regex": "random\\.choice\\s*\\(",
+        "example": "random.choice(chars)",
+        "confidence": "MEDIUM"
+      }
+    ],
+    "description": "Predictable random number generator detected.",
+    "recommendation": "Use the secrets module for cryptographic randomness."
+  },
+
+  {
+    "ruleId": "SG007",
+    "name": "Insecure Random Number Generator",
+    "severity": "HIGH",
+    "language": "JAVASCRIPT",
+    "detectors": [
+      {
+        "name": "Math.random",
+        "regex": "Math\\.random\\s*\\(",
+        "example": "Math.random()",
+        "confidence": "HIGH"
+      }
+    ],
+    "description": "Predictable random number generator detected.",
+    "recommendation": "Use crypto.randomBytes() or crypto.getRandomValues()."
+  },
+
+  {
+    "ruleId": "SG007",
+    "name": "Insecure Random Number Generator",
+    "severity": "HIGH",
+    "language": "TYPESCRIPT",
+    "detectors": [
+      {
+        "name": "Math.random",
+        "regex": "Math\\.random\\s*\\(",
+        "example": "Math.random()",
+        "confidence": "HIGH"
+      }
+    ],
+    "description": "Predictable random number generator detected.",
+    "recommendation": "Use crypto.randomBytes() or crypto.getRandomValues()."
+  },
+
+  {
+    "ruleId": "SG007",
+    "name": "Insecure Random Number Generator",
+    "severity": "HIGH",
+    "language": "C",
+    "detectors": [
+      {
+        "name": "rand",
+        "regex": "\\brand\\s*\\(",
+        "example": "rand()",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "srand",
+        "regex": "\\bsrand\\s*\\(",
+        "example": "srand(time(NULL))",
+        "confidence": "MEDIUM"
+      }
+    ],
+    "description": "Predictable random number generator detected.",
+    "recommendation": "Use a cryptographically secure random number generator where available."
+  },
+
+  {
+    "ruleId": "SG007",
+    "name": "Insecure Random Number Generator",
+    "severity": "HIGH",
+    "language": "CPP",
+    "detectors": [
+      {
+        "name": "rand",
+        "regex": "\\brand\\s*\\(",
+        "example": "rand()",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "srand",
+        "regex": "\\bsrand\\s*\\(",
+        "example": "srand(time(NULL))",
+        "confidence": "MEDIUM"
+      }
+    ],
+    "description": "Predictable random number generator detected.",
+    "recommendation": "Use std::random_device or a cryptographically secure RNG."
+  },
+
+  {
+    "ruleId": "SG007",
+    "name": "Insecure Random Number Generator",
+    "severity": "HIGH",
+    "language": "CSHARP",
+    "detectors": [
+      {
+        "name": "System.Random",
+        "regex": "new\\s+Random\\s*\\(",
+        "example": "Random r = new Random();",
+        "confidence": "HIGH"
+      }
+    ],
+    "description": "Predictable random number generator detected.",
+    "recommendation": "Use RandomNumberGenerator or RandomNumberGenerator.Create()."
+  },
+
+  {
+    "ruleId": "SG007",
+    "name": "Insecure Random Number Generator",
+    "severity": "HIGH",
+    "language": "GO",
+    "detectors": [
+      {
+        "name": "math/rand",
+        "regex": "rand\\.(Int|Intn|Float32|Float64|Seed)\\s*\\(",
+        "example": "rand.Intn(100)",
+        "confidence": "HIGH"
+      }
+    ],
+    "description": "Predictable random number generator detected.",
+    "recommendation": "Use crypto/rand for cryptographic randomness."
+  },
+
+  {
+    "ruleId": "SG007",
+    "name": "Insecure Random Number Generator",
+    "severity": "HIGH",
+    "language": "PHP",
+    "detectors": [
+      {
+        "name": "rand",
+        "regex": "\\brand\\s*\\(",
+        "example": "rand(1,100)",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "mt_rand",
+        "regex": "\\bmt_rand\\s*\\(",
+        "example": "mt_rand(1,100)",
+        "confidence": "HIGH"
+      }
+    ],
+    "description": "Predictable random number generator detected.",
+    "recommendation": "Use random_int() or random_bytes()."
+  }
+]

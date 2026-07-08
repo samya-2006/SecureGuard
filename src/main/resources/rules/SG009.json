@@ -1,0 +1,291 @@
+[
+  {
+    "ruleId": "SG009",
+    "name": "Debug Mode Enabled",
+    "severity": "MEDIUM",
+    "language": "JAVA",
+    "detectors": [
+      {
+        "name": "Spring Boot Debug",
+        "regex": "debug\\s*=\\s*true",
+        "example": "debug=true",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "Spring Trace",
+        "regex": "trace\\s*=\\s*true",
+        "example": "trace=true",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "Root Logger DEBUG",
+        "regex": "logging\\.level\\.root\\s*=\\s*DEBUG",
+        "example": "logging.level.root=DEBUG",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "Package Logger DEBUG",
+        "regex": "logging\\.level\\.[^=]+\\s*=\\s*DEBUG",
+        "example": "logging.level.com.secureguard=DEBUG",
+        "confidence": "MEDIUM"
+      },
+      {
+        "name": "System.out.println",
+        "regex": "System\\.out\\.println\\s*\\(",
+        "example": "System.out.println(password)",
+        "confidence": "LOW"
+      },
+      {
+        "name": "printStackTrace",
+        "regex": "printStackTrace\\s*\\(",
+        "example": "e.printStackTrace()",
+        "confidence": "HIGH"
+      }
+    ],
+    "description": "Debug mode or verbose debugging detected.",
+    "recommendation": "Disable debugging and verbose logging before production deployment."
+  },
+
+  {
+    "ruleId": "SG009",
+    "name": "Debug Mode Enabled",
+    "severity": "MEDIUM",
+    "language": "PYTHON",
+    "detectors": [
+      {
+        "name": "Flask Debug",
+        "regex": "app\\.run\\s*\\([^\\)]*debug\\s*=\\s*True",
+        "example": "app.run(debug=True)",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "Django DEBUG",
+        "regex": "DEBUG\\s*=\\s*True",
+        "example": "DEBUG = True",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "FastAPI Reload",
+        "regex": "reload\\s*=\\s*True",
+        "example": "uvicorn.run(..., reload=True)",
+        "confidence": "MEDIUM"
+      },
+      {
+        "name": "print()",
+        "regex": "\\bprint\\s*\\(",
+        "example": "print(password)",
+        "confidence": "LOW"
+      },
+      {
+        "name": "traceback.print_exc",
+        "regex": "traceback\\.print_exc\\s*\\(",
+        "example": "traceback.print_exc()",
+        "confidence": "HIGH"
+      }
+    ],
+    "description": "Debug configuration detected.",
+    "recommendation": "Disable DEBUG and remove debug statements."
+  },
+
+  {
+    "ruleId": "SG009",
+    "name": "Debug Mode Enabled",
+    "severity": "MEDIUM",
+    "language": "JAVASCRIPT",
+    "detectors": [
+      {
+        "name": "NODE_ENV Development",
+        "regex": "NODE_ENV\\s*=\\s*['\"]development['\"]",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "Express Development",
+        "regex": "app\\.set\\s*\\(\\s*['\"]env['\"]\\s*,\\s*['\"]development['\"]\\)",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "console.debug",
+        "regex": "console\\.debug\\s*\\(",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "console.log",
+        "regex": "console\\.log\\s*\\(",
+        "confidence": "LOW"
+      },
+      {
+        "name": "console.trace",
+        "regex": "console\\.trace\\s*\\(",
+        "confidence": "HIGH"
+      }
+    ],
+    "description": "Debug configuration detected.",
+    "recommendation": "Disable development configuration before deployment."
+  },
+
+  {
+    "ruleId": "SG009",
+    "name": "Debug Mode Enabled",
+    "severity": "MEDIUM",
+    "language": "TYPESCRIPT",
+    "detectors": [
+      {
+        "name": "NODE_ENV Development",
+        "regex": "NODE_ENV\\s*=\\s*['\"]development['\"]",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "console.debug",
+        "regex": "console\\.debug\\s*\\(",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "console.log",
+        "regex": "console\\.log\\s*\\(",
+        "confidence": "LOW"
+      }
+    ],
+    "description": "Debug configuration detected.",
+    "recommendation": "Remove debug logging."
+  },
+
+  {
+    "ruleId": "SG009",
+    "name": "Debug Mode Enabled",
+    "severity": "MEDIUM",
+    "language": "C",
+    "detectors": [
+      {
+        "name": "DEBUG Macro",
+        "regex": "#define\\s+DEBUG",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "assert",
+        "regex": "\\bassert\\s*\\(",
+        "confidence": "MEDIUM"
+      },
+      {
+        "name": "printf Debug",
+        "regex": "printf\\s*\\(",
+        "confidence": "LOW"
+      }
+    ],
+    "description": "Debug configuration detected.",
+    "recommendation": "Remove debug macros before release."
+  },
+
+  {
+    "ruleId": "SG009",
+    "name": "Debug Mode Enabled",
+    "severity": "MEDIUM",
+    "language": "CPP",
+    "detectors": [
+      {
+        "name": "DEBUG Macro",
+        "regex": "#define\\s+DEBUG",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "assert",
+        "regex": "\\bassert\\s*\\(",
+        "confidence": "MEDIUM"
+      },
+      {
+        "name": "std::cout",
+        "regex": "std::cout\\s*<<",
+        "confidence": "LOW"
+      }
+    ],
+    "description": "Debug configuration detected.",
+    "recommendation": "Compile release builds without debug output."
+  },
+
+  {
+    "ruleId": "SG009",
+    "name": "Debug Mode Enabled",
+    "severity": "MEDIUM",
+    "language": "CSHARP",
+    "detectors": [
+      {
+        "name": "Debugger Launch",
+        "regex": "Debugger\\.Launch\\s*\\(",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "Debugger Break",
+        "regex": "Debugger\\.Break\\s*\\(",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "Debug.WriteLine",
+        "regex": "Debug\\.WriteLine\\s*\\(",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "Console.WriteLine",
+        "regex": "Console\\.WriteLine\\s*\\(",
+        "confidence": "LOW"
+      }
+    ],
+    "description": "Debug functionality detected.",
+    "recommendation": "Remove debugger hooks before production."
+  },
+
+  {
+    "ruleId": "SG009",
+    "name": "Debug Mode Enabled",
+    "severity": "MEDIUM",
+    "language": "GO",
+    "detectors": [
+      {
+        "name": "fmt.Println",
+        "regex": "fmt\\.Println\\s*\\(",
+        "confidence": "LOW"
+      },
+      {
+        "name": "fmt.Printf",
+        "regex": "fmt\\.Printf\\s*\\(",
+        "confidence": "LOW"
+      },
+      {
+        "name": "log.Println",
+        "regex": "log\\.Println\\s*\\(",
+        "confidence": "MEDIUM"
+      }
+    ],
+    "description": "Debug logging detected.",
+    "recommendation": "Remove debugging statements."
+  },
+
+  {
+    "ruleId": "SG009",
+    "name": "Debug Mode Enabled",
+    "severity": "MEDIUM",
+    "language": "PHP",
+    "detectors": [
+      {
+        "name": "display_errors",
+        "regex": "display_errors\\s*=\\s*On",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "error_reporting",
+        "regex": "error_reporting\\s*\\(",
+        "confidence": "MEDIUM"
+      },
+      {
+        "name": "var_dump",
+        "regex": "var_dump\\s*\\(",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "print_r",
+        "regex": "print_r\\s*\\(",
+        "confidence": "MEDIUM"
+      }
+    ],
+    "description": "Debug configuration detected.",
+    "recommendation": "Disable error display and remove debugging functions."
+  }
+]

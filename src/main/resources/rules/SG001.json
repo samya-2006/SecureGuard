@@ -1,0 +1,384 @@
+[
+  {
+    "ruleId": "SG001",
+    "name": "Hardcoded Credentials & Secrets",
+    "severity": "CRITICAL",
+    "language": "JAVA",
+    "detectors": [
+      {
+        "name": "Hardcoded API Key",
+        "regex": "(?i)(api[_-]?key|apikey|apiKey)\\s*=\\s*[\"'][^\"']+[\"']",
+        "example": "String apiKey = \"ABCD1234\";",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "Hardcoded Password",
+        "regex": "(?i)(password|passwd|pwd)\\s*=\\s*[\"'][^\"']+[\"']",
+        "example": "String password = \"admin123\";",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "Hardcoded Secret",
+        "regex": "(?i)(secret|secretKey|clientSecret|client_key)\\s*=\\s*[\"'][^\"']+[\"']",
+        "example": "String clientSecret = \"xyz987\";",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "Hardcoded Token",
+        "regex": "(?i)(token|accessToken|refreshToken|jwt|bearerToken)\\s*=\\s*[\"'][^\"']+[\"']",
+        "example": "String accessToken = \"eyJhbGciOi...\";",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "AWS Credentials",
+        "regex": "(?i)(aws[_-]?secret|aws[_-]?access[_-]?key)\\s*=\\s*[\"'][^\"']+[\"']",
+        "example": "String aws_secret = \"AKIA...\";",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "Private Key",
+        "regex": "(?i)(private[_-]?key|privateKey|rsaPrivateKey|sshKey)\\s*=\\s*[\"'][^\"']+[\"']",
+        "example": "String privateKey = \"-----BEGIN PRIVATE KEY-----\";",
+        "confidence": "HIGH"
+      }
+    ],
+    "description": "Hardcoded credentials or secrets detected.",
+    "recommendation": "Move secrets to environment variables or a secure secret manager."
+  },
+  {
+    "ruleId": "SG001",
+    "name": "Hardcoded Credentials & Secrets",
+    "severity": "CRITICAL",
+    "language": "PYTHON",
+    "detectors": [
+      {
+        "name": "Hardcoded API Key",
+        "regex": "(?i)(api[_-]?key|apikey)\\s*=\\s*[\"'][^\"']+[\"']",
+        "example": "api_key = \"ABCD1234\"",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "Hardcoded Password",
+        "regex": "(?i)(password|passwd|pwd)\\s*=\\s*[\"'][^\"']+[\"']",
+        "example": "password = \"admin123\"",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "Hardcoded Secret",
+        "regex": "(?i)(secret|secret_key|client_secret)\\s*=\\s*[\"'][^\"']+[\"']",
+        "example": "client_secret = \"xyz987\"",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "Hardcoded Token",
+        "regex": "(?i)(token|access_token|refresh_token|jwt|bearer_token)\\s*=\\s*[\"'][^\"']+[\"']",
+        "example": "access_token = \"eyJhbGciOi...\"",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "AWS Credentials",
+        "regex": "(?i)(aws[_-]?secret|aws[_-]?access[_-]?key)\\s*=\\s*[\"'][^\"']+[\"']",
+        "example": "aws_secret = \"AKIA...\"",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "Private Key",
+        "regex": "(?i)(private[_-]?key|private_key|rsa_private_key|ssh_key)\\s*=\\s*[\"'][^\"']+[\"']",
+        "example": "private_key = \"-----BEGIN PRIVATE KEY-----\"",
+        "confidence": "HIGH"
+      }
+    ],
+    "description": "Hardcoded credentials or secrets detected.",
+    "recommendation": "Move secrets to environment variables or a secure secret manager."
+  },
+  {
+    "ruleId": "SG001",
+    "name": "Hardcoded Credentials & Secrets",
+    "severity": "CRITICAL",
+    "language": "JAVASCRIPT",
+    "detectors": [
+      {
+        "name": "Hardcoded API Key",
+        "regex": "(?i)(const|let|var)\\s+(api[_-]?key|apikey|apiKey)\\s*=\\s*[\"'`][^\"'`]+[\"'`]",
+        "example": "const apiKey = \"ABCD1234\";",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "Hardcoded Password",
+        "regex": "(?i)(const|let|var)\\s+(password|passwd|pwd)\\s*=\\s*[\"'`][^\"'`]+[\"'`]",
+        "example": "let password = \"admin123\";",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "Hardcoded Secret",
+        "regex": "(?i)(const|let|var)\\s+(secret|secretKey|clientSecret)\\s*=\\s*[\"'`][^\"'`]+[\"'`]",
+        "example": "const clientSecret = \"xyz987\";",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "Hardcoded Token",
+        "regex": "(?i)(const|let|var)\\s+(token|accessToken|refreshToken|jwt|bearerToken)\\s*=\\s*[\"'`][^\"'`]+[\"'`]",
+        "example": "const token = \"eyJhbGciOi...\";",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "AWS Credentials",
+        "regex": "(?i)(const|let|var)\\s+(awsSecret|awsAccessKey)\\s*=\\s*[\"'`][^\"'`]+[\"'`]",
+        "example": "const awsSecret = \"AKIA...\";",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "Private Key",
+        "regex": "(?i)(const|let|var)\\s+(privateKey|rsaPrivateKey|sshKey)\\s*=\\s*[\"'`][^\"'`]+[\"'`]",
+        "example": "const privateKey = \"-----BEGIN PRIVATE KEY-----\";",
+        "confidence": "HIGH"
+      }
+    ],
+    "description": "Hardcoded credentials or secrets detected.",
+    "recommendation": "Move secrets to environment variables or a secure secret manager."
+  },
+  {
+    "ruleId": "SG001",
+    "name": "Hardcoded Credentials & Secrets",
+    "severity": "CRITICAL",
+    "language": "TYPESCRIPT",
+    "detectors": [
+      {
+        "name": "Hardcoded API Key",
+        "regex": "(?i)(const|let|var)\\s+(api[_-]?key|apikey|apiKey)\\s*(:\\s*\\w+)?\\s*=\\s*[\"'`][^\"'`]+[\"'`]",
+        "example": "const apiKey: string = \"ABCD1234\";",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "Hardcoded Password",
+        "regex": "(?i)(const|let|var)\\s+(password|passwd|pwd)\\s*(:\\s*\\w+)?\\s*=\\s*[\"'`][^\"'`]+[\"'`]",
+        "example": "let password: string = \"admin123\";",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "Hardcoded Secret",
+        "regex": "(?i)(const|let|var)\\s+(secret|secretKey|clientSecret)\\s*(:\\s*\\w+)?\\s*=\\s*[\"'`][^\"'`]+[\"'`]",
+        "example": "const clientSecret = \"xyz987\";",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "Hardcoded Token",
+        "regex": "(?i)(const|let|var)\\s+(token|accessToken|refreshToken|jwt|bearerToken)\\s*(:\\s*\\w+)?\\s*=\\s*[\"'`][^\"'`]+[\"'`]",
+        "example": "const token = \"eyJhbGciOi...\";",
+        "confidence": "HIGH"
+      }
+    ],
+    "description": "Hardcoded credentials or secrets detected.",
+    "recommendation": "Move secrets to environment variables or a secure secret manager."
+  },
+  {
+    "ruleId": "SG001",
+    "name": "Hardcoded Credentials & Secrets",
+    "severity": "CRITICAL",
+    "language": "C",
+    "detectors": [
+      {
+        "name": "Hardcoded Character Array",
+        "regex": "(?i)char\\s+.*(api[_-]?key|password|passwd|secret|token|jwt).*\\[.*\\]\\s*=\\s*\"[^\"]+\"",
+        "example": "char password[] = \"admin123\";",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "Hardcoded Pointer",
+        "regex": "(?i)char\\s*\\*\\s*(api[_-]?key|password|secret|token)\\s*=\\s*\"[^\"]+\"",
+        "example": "char *apiKey = \"ABCD1234\";",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "Hardcoded Macro",
+        "regex": "#define\\s+(API_KEY|PASSWORD|SECRET|TOKEN)\\s+\"[^\"]+\"",
+        "example": "#define API_KEY \"ABCD1234\"",
+        "confidence": "HIGH"
+      }
+    ],
+    "description": "Hardcoded credentials or secrets detected.",
+    "recommendation": "Move secrets to secure configuration."
+  },
+  {
+    "ruleId": "SG001",
+    "name": "Hardcoded Credentials & Secrets",
+    "severity": "CRITICAL",
+    "language": "CPP",
+    "detectors": [
+      {
+        "name": "Hardcoded std::string",
+        "regex": "(?i)std::string\\s+(api[_-]?key|password|passwd|secret|token|jwt)\\s*=\\s*\"[^\"]+\"",
+        "example": "std::string apiKey = \"ABCD1234\";",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "Hardcoded const char*",
+        "regex": "(?i)const\\s+char\\s*\\*\\s*(api[_-]?key|password|secret|token)\\s*=\\s*\"[^\"]+\"",
+        "example": "const char* password = \"admin123\";",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "Hardcoded Macro",
+        "regex": "#define\\s+(API_KEY|PASSWORD|SECRET|TOKEN)\\s+\"[^\"]+\"",
+        "example": "#define API_KEY \"ABCD1234\"",
+        "confidence": "HIGH"
+      }
+    ],
+    "description": "Hardcoded credentials or secrets detected.",
+    "recommendation": "Move secrets to secure configuration."
+  },
+  {
+    "ruleId": "SG001",
+    "name": "Hardcoded Credentials & Secrets",
+    "severity": "CRITICAL",
+    "language": "CSHARP",
+    "detectors": [
+      {
+        "name": "Hardcoded API Key",
+        "regex": "(?i)(string|const\\s+string)\\s+(api[_-]?key|apikey|apiKey)\\s*=\\s*\"[^\"]+\"",
+        "example": "string apiKey = \"ABCD1234\";",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "Hardcoded Password",
+        "regex": "(?i)(string|const\\s+string)\\s+(password|passwd|pwd)\\s*=\\s*\"[^\"]+\"",
+        "example": "string password = \"admin123\";",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "Hardcoded Secret",
+        "regex": "(?i)(string|const\\s+string)\\s+(secret|secretKey|clientSecret)\\s*=\\s*\"[^\"]+\"",
+        "example": "string secret = \"xyz987\";",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "Hardcoded Token",
+        "regex": "(?i)(string|const\\s+string)\\s+(token|accessToken|refreshToken|jwt|bearerToken)\\s*=\\s*\"[^\"]+\"",
+        "example": "string token = \"eyJhbGc...\";",
+        "confidence": "HIGH"
+      }
+    ],
+    "description": "Hardcoded credentials or secrets detected.",
+    "recommendation": "Move secrets to environment variables or a secure secret manager."
+  },
+  {
+    "ruleId": "SG001",
+    "name": "Hardcoded Credentials & Secrets",
+    "severity": "CRITICAL",
+    "language": "GO",
+    "detectors": [
+      {
+        "name": "Hardcoded API Key",
+        "regex": "(?i)(api[_-]?key|apikey)\\s*(:=|=)\\s*\"[^\"]+\"",
+        "example": "apiKey := \"ABCD1234\"",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "Hardcoded Password",
+        "regex": "(?i)(password|passwd|pwd)\\s*(:=|=)\\s*\"[^\"]+\"",
+        "example": "password := \"admin123\"",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "Hardcoded Secret",
+        "regex": "(?i)(secret|clientSecret)\\s*(:=|=)\\s*\"[^\"]+\"",
+        "example": "secret := \"xyz987\"",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "Hardcoded Token",
+        "regex": "(?i)(token|accessToken|refreshToken|jwt)\\s*(:=|=)\\s*\"[^\"]+\"",
+        "example": "token := \"eyJhbGc...\"",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "Hardcoded Constant",
+        "regex": "(?i)const\\s+(API_KEY|PASSWORD|SECRET|TOKEN)\\s*=\\s*\"[^\"]+\"",
+        "example": "const API_KEY = \"12345\"",
+        "confidence": "HIGH"
+      }
+    ],
+    "description": "Hardcoded credentials or secrets detected.",
+    "recommendation": "Move secrets to environment variables or a secure secret manager."
+  },{
+  "ruleId": "SG001",
+  "name": "Hardcoded Credentials & Secrets",
+  "severity": "CRITICAL",
+  "language": "PHP",
+  "detectors": [
+    {
+      "name": "Hardcoded API Key",
+      "regex": "(?i)\\$(api[_-]?key|apikey|apiKey)\\s*=\\s*[\"'][^\"']+[\"']",
+      "example": "$apiKey = \"ABCD1234\";",
+      "confidence": "HIGH"
+    },
+    {
+      "name": "Hardcoded Password",
+      "regex": "(?i)\\$(password|passwd|pwd)\\s*=\\s*[\"'][^\"']+[\"']",
+      "example": "$password = \"admin123\";",
+      "confidence": "HIGH"
+    },
+    {
+      "name": "Hardcoded Secret",
+      "regex": "(?i)\\$(secret|secretKey|clientSecret)\\s*=\\s*[\"'][^\"']+[\"']",
+      "example": "$secret = \"xyz987\";",
+      "confidence": "HIGH"
+    },
+    {
+      "name": "Hardcoded Token",
+      "regex": "(?i)\\$(token|accessToken|refreshToken|jwt)\\s*=\\s*[\"'][^\"']+[\"']",
+      "example": "$token = \"eyJhbGc...\";",
+      "confidence": "HIGH"
+    },
+    {
+      "name": "Hardcoded define() Constant",
+      "regex": "(?i)define\\s*\\(\\s*[\"'](API_KEY|PASSWORD|SECRET|TOKEN)[\"']\\s*,\\s*[\"'][^\"']+[\"']\\s*\\)",
+      "example": "define(\"API_KEY\",\"123456\")",
+      "confidence": "HIGH"
+    }
+  ],
+  "description": "Hardcoded credentials or secrets detected.",
+  "recommendation": "Move secrets to environment variables or a secure secret manager."
+},
+  {
+    "ruleId": "SG001",
+    "name": "Hardcoded Credentials & Secrets",
+    "severity": "CRITICAL",
+    "language": "PHP",
+    "detectors": [
+      {
+        "name": "Hardcoded API Key",
+        "regex": "(?i)\\$(api[_-]?key|apikey|apiKey)\\s*=\\s*[\"'][^\"']+[\"']",
+        "example": "$apiKey = \"ABCD1234\";",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "Hardcoded Password",
+        "regex": "(?i)\\$(password|passwd|pwd)\\s*=\\s*[\"'][^\"']+[\"']",
+        "example": "$password = \"admin123\";",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "Hardcoded Secret",
+        "regex": "(?i)\\$(secret|secretKey|clientSecret)\\s*=\\s*[\"'][^\"']+[\"']",
+        "example": "$secret = \"xyz987\";",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "Hardcoded Token",
+        "regex": "(?i)\\$(token|accessToken|refreshToken|jwt)\\s*=\\s*[\"'][^\"']+[\"']",
+        "example": "$token = \"eyJhbGc...\";",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "Hardcoded define() Constant",
+        "regex": "(?i)define\\s*\\(\\s*[\"'](API_KEY|PASSWORD|SECRET|TOKEN)[\"']\\s*,\\s*[\"'][^\"']+[\"']\\s*\\)",
+        "example": "define(\"API_KEY\",\"123456\")",
+        "confidence": "HIGH"
+      }
+    ],
+    "description": "Hardcoded credentials or secrets detected.",
+    "recommendation": "Move secrets to environment variables or a secure secret manager."
+  }
+
+]

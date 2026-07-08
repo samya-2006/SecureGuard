@@ -1,0 +1,323 @@
+[
+  {
+    "ruleId": "SG005",
+    "name": "Path Traversal",
+    "severity": "HIGH",
+    "language": "JAVA",
+    "detectors": [
+      {
+        "name": "File Constructor",
+        "regex": "new\\s+File\\s*\\(",
+        "example": "new File(userInput)",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "FileInputStream",
+        "regex": "new\\s+FileInputStream\\s*\\(",
+        "example": "new FileInputStream(userInput)",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "Files.readAllBytes",
+        "regex": "Files\\.readAllBytes\\s*\\(",
+        "example": "Files.readAllBytes(Paths.get(path))",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "Paths.get",
+        "regex": "Paths\\.get\\s*\\(",
+        "example": "Paths.get(userInput)",
+        "confidence": "MEDIUM"
+      }
+    ],
+    "description": "Possible path traversal vulnerability detected.",
+    "recommendation": "Validate and normalize file paths before accessing the filesystem."
+  },
+
+
+{
+"ruleId": "SG005",
+"name": "Path Traversal",
+"severity": "HIGH",
+"language": "PYTHON",
+"detectors": [
+{
+"name": "open()",
+"regex": "\\bopen\\s*\\(",
+"example": "open(user_input)",
+"confidence": "HIGH"
+},
+{
+"name": "os.open",
+"regex": "os\\.open\\s*\\(",
+"example": "os.open(path)",
+"confidence": "HIGH"
+},
+{
+"name": "pathlib.Path",
+"regex": "Path\\s*\\(",
+"example": "Path(user_input)",
+"confidence": "MEDIUM"
+},
+{
+"name": "os.path.join",
+"regex": "os\\.path\\.join\\s*\\(",
+"example": "os.path.join(base,userInput)",
+"confidence": "MEDIUM"
+}
+],
+"description": "Possible path traversal vulnerability detected.",
+"recommendation": "Validate and sanitize file paths."
+},
+
+
+{
+"ruleId": "SG005",
+"name": "Path Traversal",
+"severity": "HIGH",
+"language": "JAVASCRIPT",
+"detectors": [
+{
+"name": "fs.readFile",
+"regex": "fs\\.readFile\\s*\\(",
+"example": "fs.readFile(path)",
+"confidence": "HIGH"
+},
+{
+"name": "fs.readFileSync",
+"regex": "fs\\.readFileSync\\s*\\(",
+"example": "fs.readFileSync(path)",
+"confidence": "HIGH"
+},
+{
+"name": "fs.createReadStream",
+"regex": "fs\\.createReadStream\\s*\\(",
+"example": "fs.createReadStream(path)",
+"confidence": "HIGH"
+},
+{
+"name": "path.join",
+"regex": "path\\.join\\s*\\(",
+"example": "path.join(base,userInput)",
+"confidence": "MEDIUM"
+}
+],
+"description": "Possible path traversal vulnerability detected.",
+"recommendation": "Validate user-controlled paths."
+},
+
+
+{
+"ruleId": "SG005",
+"name": "Path Traversal",
+"severity": "HIGH",
+"language": "TYPESCRIPT",
+"detectors": [
+{
+"name": "fs.readFile",
+"regex": "fs\\.readFile\\s*\\(",
+"example": "fs.readFile(path)",
+"confidence": "HIGH"
+},
+{
+"name": "fs.readFileSync",
+"regex": "fs\\.readFileSync\\s*\\(",
+"example": "fs.readFileSync(path)",
+"confidence": "HIGH"
+},
+{
+"name": "fs.createReadStream",
+"regex": "fs\\.createReadStream\\s*\\(",
+"example": "fs.createReadStream(path)",
+"confidence": "HIGH"
+},
+{
+"name": "path.join",
+"regex": "path\\.join\\s*\\(",
+"example": "path.join(base,userInput)",
+"confidence": "MEDIUM"
+}
+],
+"description": "Possible path traversal vulnerability detected.",
+"recommendation": "Validate user-controlled paths."
+},
+
+
+{
+"ruleId": "SG005",
+"name": "Path Traversal",
+"severity": "HIGH",
+"language": "C",
+"detectors": [
+{
+"name": "fopen",
+"regex": "\\bfopen\\s*\\(",
+"example": "fopen(userInput,\"r\")",
+"confidence": "HIGH"
+},
+{
+"name": "open",
+"regex": "\\bopen\\s*\\(",
+"example": "open(path,O_RDONLY)",
+"confidence": "HIGH"
+},
+{
+"name": "freopen",
+"regex": "\\bfreopen\\s*\\(",
+"example": "freopen(path,\"r\",stdin)",
+"confidence": "HIGH"
+},
+{
+"name": "access",
+"regex": "\\baccess\\s*\\(",
+"example": "access(path,F_OK)",
+"confidence": "MEDIUM"
+}
+],
+"description": "Possible path traversal vulnerability detected.",
+"recommendation": "Validate, normalize and restrict file paths before accessing files."
+},
+
+
+{
+"ruleId": "SG005",
+"name": "Path Traversal",
+"severity": "HIGH",
+"language": "CPP",
+"detectors": [
+{
+"name": "ifstream",
+"regex": "std::ifstream\\s*\\(",
+"example": "std::ifstream file(path)",
+"confidence": "HIGH"
+},
+{
+"name": "ofstream",
+"regex": "std::ofstream\\s*\\(",
+"example": "std::ofstream file(path)",
+"confidence": "HIGH"
+},
+{
+"name": "fstream",
+"regex": "std::fstream\\s*\\(",
+"example": "std::fstream file(path)",
+"confidence": "HIGH"
+},
+{
+"name": "filesystem::path",
+"regex": "std::filesystem::path",
+"example": "std::filesystem::path(userInput)",
+"confidence": "MEDIUM"
+}
+],
+"description": "Possible path traversal vulnerability detected.",
+"recommendation": "Normalize and validate all filesystem paths."
+},
+
+
+{
+"ruleId": "SG005",
+"name": "Path Traversal",
+"severity": "HIGH",
+"language": "CSHARP",
+"detectors": [
+{
+"name": "File.ReadAllText",
+"regex": "File\\.Read(AllText|AllBytes|Lines)\\s*\\(",
+"example": "File.ReadAllText(path)",
+"confidence": "HIGH"
+},
+{
+"name": "File.Open",
+"regex": "File\\.Open\\s*\\(",
+"example": "File.Open(path,FileMode.Open)",
+"confidence": "HIGH"
+},
+{
+"name": "FileStream",
+"regex": "new\\s+FileStream\\s*\\(",
+"example": "new FileStream(path,FileMode.Open)",
+"confidence": "HIGH"
+},
+{
+"name": "Directory.GetFiles",
+"regex": "Directory\\.GetFiles\\s*\\(",
+"example": "Directory.GetFiles(path)",
+"confidence": "MEDIUM"
+}
+],
+"description": "Possible path traversal vulnerability detected.",
+"recommendation": "Validate user-controlled file paths before file operations."
+},
+
+
+{
+"ruleId": "SG005",
+"name": "Path Traversal",
+"severity": "HIGH",
+"language": "GO",
+"detectors": [
+{
+"name": "os.Open",
+"regex": "os\\.Open\\s*\\(",
+"example": "os.Open(path)",
+"confidence": "HIGH"
+},
+{
+"name": "os.OpenFile",
+"regex": "os\\.OpenFile\\s*\\(",
+"example": "os.OpenFile(path,... )",
+"confidence": "HIGH"
+},
+{
+"name": "os.ReadFile",
+"regex": "os\\.ReadFile\\s*\\(",
+"example": "os.ReadFile(path)",
+"confidence": "HIGH"
+},
+{
+"name": "filepath.Join",
+"regex": "filepath\\.Join\\s*\\(",
+"example": "filepath.Join(base,userInput)",
+"confidence": "MEDIUM"
+}
+],
+"description": "Possible path traversal vulnerability detected.",
+"recommendation": "Sanitize and normalize file paths before file access."
+},
+
+{
+"ruleId": "SG005",
+"name": "Path Traversal",
+"severity": "HIGH",
+"language": "PHP",
+"detectors": [
+{
+"name": "fopen",
+"regex": "\\bfopen\\s*\\(",
+"example": "fopen($path,\"r\")",
+"confidence": "HIGH"
+},
+{
+"name": "file_get_contents",
+"regex": "file_get_contents\\s*\\(",
+"example": "file_get_contents($path)",
+"confidence": "HIGH"
+},
+{
+"name": "readfile",
+"regex": "\\breadfile\\s*\\(",
+"example": "readfile($path)",
+"confidence": "HIGH"
+},
+{
+"name": "include",
+"regex": "\\b(include|include_once|require|require_once)\\s*\\(",
+"example": "include($file)",
+"confidence": "MEDIUM"
+}
+],
+"description": "Possible path traversal vulnerability detected.",
+"recommendation": "Never use unvalidated user input in file paths or includes."
+}
+]

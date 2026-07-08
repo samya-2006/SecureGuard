@@ -1,0 +1,188 @@
+[
+  {
+    "ruleId": "SG003",
+    "name": "SQL Injection",
+    "severity": "CRITICAL",
+    "language": "JAVA",
+    "detectors": [
+      {
+        "name": "SQL Query Concatenation",
+        "regex": "(?i)(SELECT|INSERT|UPDATE|DELETE).*(\\+)",
+        "example": "String sql = \"SELECT * FROM users WHERE id=\" + id;",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "Statement.executeQuery",
+        "regex": "\\.executeQuery\\s*\\(",
+        "example": "stmt.executeQuery(sql);",
+        "confidence": "MEDIUM"
+      },
+      {
+        "name": "Statement.executeUpdate",
+        "regex": "\\.executeUpdate\\s*\\(",
+        "example": "stmt.executeUpdate(sql);",
+        "confidence": "MEDIUM"
+      },
+      {
+        "name": "Statement.execute",
+        "regex": "\\.execute\\s*\\(",
+        "example": "stmt.execute(sql);",
+        "confidence": "MEDIUM"
+      }
+    ],
+    "description": "Possible SQL Injection detected.",
+    "recommendation": "Use PreparedStatement with parameterized queries."
+  },
+  {
+  "ruleId": "SG003",
+  "name": "SQL Injection",
+  "severity": "CRITICAL",
+  "language": "PYTHON",
+  "detectors": [
+    {
+      "name": "SQL Concatenation",
+      "regex": "(?i)(SELECT|INSERT|UPDATE|DELETE).*(\\+)",
+      "example": "query = \"SELECT * FROM users WHERE id=\" + user_id",
+      "confidence": "HIGH"
+    },
+    {
+      "name": "cursor.execute",
+      "regex": "\\.execute\\s*\\(",
+      "example": "cursor.execute(query)",
+      "confidence": "MEDIUM"
+    }
+  ],
+  "description": "Possible SQL Injection detected.",
+  "recommendation": "Use parameterized queries."
+},
+{
+"ruleId": "SG003",
+"name": "SQL Injection",
+"severity": "CRITICAL",
+"language": "JAVASCRIPT",
+"detectors": [
+{
+"name": "SQL Concatenation",
+"regex": "(?i)(SELECT|INSERT|UPDATE|DELETE).*(\\+)",
+"example": "const sql = \"SELECT * FROM users WHERE id=\" + id;",
+"confidence": "HIGH"
+},
+{
+"name": "connection.query",
+"regex": "\\.query\\s*\\(",
+"example": "connection.query(sql)",
+"confidence": "MEDIUM"
+}
+],
+"description": "Possible SQL Injection detected.",
+"recommendation": "Use parameterized queries."
+},
+{
+"ruleId": "SG003",
+"name": "SQL Injection",
+"severity": "CRITICAL",
+"language": "TYPESCRIPT",
+"detectors": [
+{
+"name": "SQL Concatenation",
+"regex": "(?i)(SELECT|INSERT|UPDATE|DELETE).*(\\+)",
+"example": "const sql:string = \"SELECT * FROM users WHERE id=\" + id;",
+"confidence": "HIGH"
+},
+{
+"name": "query Execution",
+"regex": "\\.query\\s*\\(",
+"example": "connection.query(sql)",
+"confidence": "MEDIUM"
+}
+],
+"description": "Possible SQL Injection detected.",
+"recommendation": "Use parameterized queries."
+},
+{
+"ruleId": "SG003",
+"name": "SQL Injection",
+"severity": "CRITICAL",
+"language": "C",
+"detectors": [
+{
+"name": "mysql_query",
+"regex": "mysql_query\\s*\\(",
+"example": "mysql_query(conn, query);",
+"confidence": "HIGH"
+}
+],
+"description": "Possible SQL Injection detected.",
+"recommendation": "Use prepared statements provided by your database library."
+},
+{
+"ruleId": "SG003",
+"name": "SQL Injection",
+"severity": "CRITICAL",
+"language": "CPP",
+"detectors": [
+{
+"name": "mysql_query",
+"regex": "mysql_query\\s*\\(",
+"example": "mysql_query(conn, query);",
+"confidence": "HIGH"
+}
+],
+"description": "Possible SQL Injection detected.",
+"recommendation": "Use prepared statements provided by your database library."
+},
+{
+"ruleId": "SG003",
+"name": "SQL Injection",
+"severity": "CRITICAL",
+"language": "CSHARP",
+"detectors": [
+{
+"name": "SqlCommand",
+"regex": "SqlCommand\\s*\\(",
+"example": "new SqlCommand(query, conn)",
+"confidence": "HIGH"
+}
+],
+"description": "Possible SQL Injection detected.",
+"recommendation": "Use parameterized SqlCommand objects."
+},
+{
+"ruleId": "SG003",
+"name": "SQL Injection",
+"severity": "CRITICAL",
+"language": "GO",
+"detectors": [
+{
+"name": "db.Query",
+"regex": "\\.(Query|Exec|QueryRow)\\s*\\(",
+"example": "db.Query(query)",
+"confidence": "HIGH"
+}
+],
+"description": "Possible SQL Injection detected.",
+"recommendation": "Use parameterized queries."
+},
+{
+"ruleId": "SG003",
+"name": "SQL Injection",
+"severity": "CRITICAL",
+"language": "PHP",
+"detectors": [
+{
+"name": "mysqli_query",
+"regex": "mysqli_query\\s*\\(",
+"example": "mysqli_query($conn,$sql)",
+"confidence": "HIGH"
+},
+{
+"name": "PDO query",
+"regex": "->query\\s*\\(",
+"example": "$pdo->query($sql)",
+"confidence": "HIGH"
+}
+],
+"description": "Possible SQL Injection detected.",
+"recommendation": "Use prepared statements."
+}
+  ]

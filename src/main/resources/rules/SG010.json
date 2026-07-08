@@ -1,0 +1,231 @@
+[
+  {
+    "ruleId": "SG010",
+    "name": "Insecure HTTP Communication",
+    "severity": "HIGH",
+    "language": "JAVA",
+    "detectors": [
+      {
+        "name": "HTTP URL",
+        "regex":"\"http://[^\"]+\"",
+        "example": "new URL(\"http://example.com\")",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "HttpURLConnection",
+        "regex": "HttpURLConnection",
+        "example": "HttpURLConnection connection;",
+        "confidence": "MEDIUM"
+      },
+      {
+        "name": "RestTemplate HTTP",
+        "regex": "RestTemplate\\.(getForObject|postForObject|exchange).*http://",
+        "example": "restTemplate.getForObject(\"http://api\")",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "Apache HttpClient HTTP",
+        "regex": "HttpGet\\s*\\(\\s*\"http://",
+        "example": "new HttpGet(\"http://...\")",
+        "confidence": "HIGH"
+      }
+    ],
+    "description": "HTTP communication detected.",
+    "recommendation": "Use HTTPS instead of HTTP to encrypt communication."
+  },
+
+  {
+    "ruleId": "SG010",
+    "name": "Insecure HTTP Communication",
+    "severity": "HIGH",
+    "language": "PYTHON",
+    "detectors": [
+      {
+        "name": "requests HTTP",
+        "regex": "requests\\.(get|post|put|delete|patch)\\s*\\(\\s*['\"]http://",
+        "example": "requests.get(\"http://...\")",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "urllib",
+        "regex": "urllib.*http://",
+        "example": "urllib.request.urlopen(\"http://...\")",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "http.client",
+        "regex": "http\\.client",
+        "example": "import http.client",
+        "confidence": "MEDIUM"
+      }
+    ],
+    "description": "HTTP communication detected.",
+    "recommendation": "Use HTTPS endpoints."
+  },
+
+  {
+    "ruleId": "SG010",
+    "name": "Insecure HTTP Communication",
+    "severity": "HIGH",
+    "language": "JAVASCRIPT",
+    "detectors": [
+      {
+        "name": "fetch HTTP",
+        "regex": "fetch\\s*\\(\\s*['\"]http://",
+        "example": "fetch(\"http://...\")",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "axios HTTP",
+        "regex": "axios\\.(get|post|put|delete)\\s*\\(\\s*['\"]http://",
+        "example": "axios.get(\"http://...\")",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "XMLHttpRequest",
+        "regex": "open\\s*\\(\\s*['\"]GET['\"].*http://",
+        "example": "xhr.open(\"GET\",\"http://...\")",
+        "confidence": "HIGH"
+      }
+    ],
+    "description": "HTTP communication detected.",
+    "recommendation": "Always use HTTPS."
+  },
+
+  {
+    "ruleId": "SG010",
+    "name": "Insecure HTTP Communication",
+    "severity": "HIGH",
+    "language": "TYPESCRIPT",
+    "detectors": [
+      {
+        "name": "fetch HTTP",
+        "regex": "fetch\\s*\\(\\s*['\"]http://",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "axios HTTP",
+        "regex": "axios\\.(get|post|put|delete)\\s*\\(\\s*['\"]http://",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "Angular HttpClient",
+        "regex": "http\\.(get|post|put|delete).*http://",
+        "confidence": "HIGH"
+      }
+    ],
+    "description": "HTTP communication detected.",
+    "recommendation": "Replace HTTP endpoints with HTTPS."
+  },
+
+  {
+    "ruleId": "SG010",
+    "name": "Insecure HTTP Communication",
+    "severity": "HIGH",
+    "language": "C",
+    "detectors": [
+      {
+        "name": "libcurl HTTP",
+        "regex": "CURLOPT_URL.*http://",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "HTTP URL",
+        "regex": "\"http://",
+        "confidence": "MEDIUM"
+      }
+    ],
+    "description": "HTTP communication detected.",
+    "recommendation": "Prefer HTTPS."
+  },
+
+  {
+    "ruleId": "SG010",
+    "name": "Insecure HTTP Communication",
+    "severity": "HIGH",
+    "language": "CPP",
+    "detectors": [
+      {
+        "name": "libcurl HTTP",
+        "regex": "CURLOPT_URL.*http://",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "HTTP URL",
+        "regex": "\"http://",
+        "confidence": "MEDIUM"
+      }
+    ],
+    "description": "HTTP communication detected.",
+    "recommendation": "Prefer HTTPS."
+  },
+
+  {
+    "ruleId": "SG010",
+    "name": "Insecure HTTP Communication",
+    "severity": "HIGH",
+    "language": "CSHARP",
+    "detectors": [
+      {
+        "name": "HttpClient HTTP",
+        "regex": "http://",
+        "example": "client.GetAsync(\"http://...\")",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "WebRequest HTTP",
+        "regex": "WebRequest\\.Create.*http://",
+        "confidence": "HIGH"
+      }
+    ],
+    "description": "HTTP communication detected.",
+    "recommendation": "Use HTTPS."
+  },
+
+  {
+    "ruleId": "SG010",
+    "name": "Insecure HTTP Communication",
+    "severity": "HIGH",
+    "language": "GO",
+    "detectors": [
+      {
+        "name": "net/http",
+        "regex": "http\\.(Get|Post|Do).*http://",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "HTTP URL",
+        "regex": "\"http://",
+        "confidence": "MEDIUM"
+      }
+    ],
+    "description": "HTTP communication detected.",
+    "recommendation": "Always communicate over HTTPS."
+  },
+
+  {
+    "ruleId": "SG010",
+    "name": "Insecure HTTP Communication",
+    "severity": "HIGH",
+    "language": "PHP",
+    "detectors": [
+      {
+        "name": "cURL HTTP",
+        "regex": "curl_setopt\\s*\\([^\\)]*CURLOPT_URL[^\\)]*http://",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "file_get_contents HTTP",
+        "regex": "file_get_contents\\s*\\(\\s*['\"]http://",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "HTTP URL",
+        "regex": "\"http://",
+        "confidence": "MEDIUM"
+      }
+    ],
+    "description": "HTTP communication detected.",
+    "recommendation": "Use HTTPS endpoints instead of HTTP."
+  }
+]

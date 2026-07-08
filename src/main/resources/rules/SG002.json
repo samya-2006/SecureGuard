@@ -1,0 +1,167 @@
+[{
+  "ruleId": "SG002",
+  "name": "Wildcard CORS",
+  "severity": "HIGH",
+  "language": "JAVA",
+  "detectors": [
+    {
+      "name": "Spring allowedOrigins",
+      "regex": "\\.allowedOrigins\\s*\\(\\s*\"\\*\"\\s*\\)",
+      "example": ".allowedOrigins(\"*\")",
+      "confidence": "HIGH"
+    },
+    {
+      "name": "Spring addAllowedOrigin",
+      "regex": "\\.addAllowedOrigin\\s*\\(\\s*\"\\*\"\\s*\\)",
+      "example": "config.addAllowedOrigin(\"*\")",
+      "confidence": "HIGH"
+    },
+    {
+      "name": "Response Header",
+      "regex": "setHeader\\s*\\(\\s*\"Access-Control-Allow-Origin\"\\s*,\\s*\"\\*\"\\s*\\)",
+      "example": "response.setHeader(\"Access-Control-Allow-Origin\",\"*\")",
+      "confidence": "HIGH"
+    },
+    {
+      "name": "Response addHeader",
+      "regex": "addHeader\\s*\\(\\s*\"Access-Control-Allow-Origin\"\\s*,\\s*\"\\*\"\\s*\\)",
+      "example": "response.addHeader(\"Access-Control-Allow-Origin\",\"*\")",
+      "confidence": "HIGH"
+    }
+  ],
+  "description": "Wildcard CORS allows every website to access the application.",
+  "recommendation": "Allow only trusted origins."
+},
+  {
+    "ruleId": "SG002",
+    "name": "Wildcard CORS",
+    "severity": "HIGH",
+    "language": "PYTHON",
+    "detectors": [
+      {
+        "name": "Flask-CORS",
+        "regex": "CORS\\s*\\(.*origins\\s*=\\s*[\"']\\*[\"']",
+        "example": "CORS(app, origins=\"*\")",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "FastAPI CORSMiddleware",
+        "regex": "allow_origins\\s*=\\s*\\[[\"']\\*[\"']\\]",
+        "example": "allow_origins=[\"*\"]",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "Django CORS",
+        "regex": "CORS_ALLOWED_ORIGINS\\s*=\\s*\\[[\"']\\*[\"']\\]",
+        "example": "CORS_ALLOWED_ORIGINS=[\"*\"]",
+        "confidence": "HIGH"
+      }
+    ],
+    "description": "Wildcard CORS allows every website to access the application.",
+    "recommendation": "Restrict CORS to trusted domains."
+  },
+  {
+    "ruleId": "SG002",
+    "name": "Wildcard CORS",
+    "severity": "HIGH",
+    "language": "JAVASCRIPT",
+    "detectors": [
+      {
+        "name": "Express CORS",
+        "regex": "origin\\s*:\\s*[\"']\\*[\"']",
+        "example": "origin:\"*\"",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "Express Header",
+        "regex": "Access-Control-Allow-Origin[\"']\\s*,\\s*[\"']\\*[\"']",
+        "example": "res.header(\"Access-Control-Allow-Origin\",\"*\")",
+        "confidence": "HIGH"
+      }
+    ],
+    "description": "Wildcard CORS allows every website to access the application.",
+    "recommendation": "Restrict CORS to trusted domains."
+  },
+  {
+    "ruleId": "SG002",
+    "name": "Wildcard CORS",
+    "severity": "HIGH",
+    "language": "TYPESCRIPT",
+    "detectors": [
+      {
+        "name": "Express/NestJS CORS",
+        "regex": "origin\\s*:\\s*[\"'`]\\*[\"'`]",
+        "example": "origin: \"*\"",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "Header Configuration",
+        "regex": "Access-Control-Allow-Origin[\"'`]\\s*,\\s*[\"'`]\\*[\"'`]",
+        "example": "res.header(\"Access-Control-Allow-Origin\",\"*\")",
+        "confidence": "HIGH"
+      }
+    ],
+    "description": "Wildcard CORS allows every website to access the application.",
+    "recommendation": "Restrict CORS to trusted domains."
+  },
+  {
+    "ruleId": "SG002",
+    "name": "Wildcard CORS",
+    "severity": "HIGH",
+    "language": "CSHARP",
+    "detectors": [
+      {
+        "name": "ASP.NET AllowAnyOrigin",
+        "regex": "AllowAnyOrigin\\s*\\(",
+        "example": "policy.AllowAnyOrigin();",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "Response Header",
+        "regex": "Access-Control-Allow-Origin\"\\s*,\\s*\"\\*\"",
+        "example": "Response.Headers.Add(\"Access-Control-Allow-Origin\",\"*\");",
+        "confidence": "HIGH"
+      }
+    ],
+    "description": "Wildcard CORS allows every website to access the application.",
+    "recommendation": "Restrict CORS to trusted domains."
+  },
+  {
+    "ruleId": "SG002",
+    "name": "Wildcard CORS",
+    "severity": "HIGH",
+    "language": "GO",
+    "detectors": [
+      {
+        "name": "Gin/Fiber AllowOrigins",
+        "regex": "AllowOrigins\\s*:\\s*\\[?\"\\*\"\\]?",
+        "example": "AllowOrigins: []string{\"*\"}",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "HTTP Header",
+        "regex": "Access-Control-Allow-Origin\"\\s*,\\s*\"\\*\"",
+        "example": "w.Header().Set(\"Access-Control-Allow-Origin\",\"*\")",
+        "confidence": "HIGH"
+      }
+    ],
+    "description": "Wildcard CORS allows every website to access the application.",
+    "recommendation": "Restrict CORS to trusted domains."
+  },
+  {
+    "ruleId": "SG002",
+    "name": "Wildcard CORS",
+    "severity": "HIGH",
+    "language": "PHP",
+    "detectors": [
+      {
+        "name": "Header Configuration",
+        "regex": "header\\s*\\(\\s*[\"']Access-Control-Allow-Origin:\\s*\\*[\"']\\s*\\)",
+        "example": "header(\"Access-Control-Allow-Origin: *\");",
+        "confidence": "HIGH"
+      }
+    ],
+    "description": "Wildcard CORS allows every website to access the application.",
+    "recommendation": "Restrict CORS to trusted domains."
+  }
+  ]

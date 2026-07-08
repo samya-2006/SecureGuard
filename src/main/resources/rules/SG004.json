@@ -1,0 +1,158 @@
+[
+  {
+    "ruleId": "SG004",
+    "name": "Command Injection",
+    "severity": "CRITICAL",
+    "language": "JAVA",
+    "detectors": [
+      {
+        "name": "Runtime.exec",
+        "regex": "Runtime\\.getRuntime\\s*\\(\\s*\\)\\s*\\.exec\\s*\\(",
+        "example": "Runtime.getRuntime().exec(command);",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "ProcessBuilder",
+        "regex": "new\\s+ProcessBuilder\\s*\\(",
+        "example": "new ProcessBuilder(command);",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "ProcessBuilder.start",
+        "regex": "\\.start\\s*\\(",
+        "example": "processBuilder.start();",
+        "confidence": "MEDIUM"
+      },
+      {
+        "name": "Process Impl",
+        "regex": "Process\\s+[a-zA-Z_][a-zA-Z0-9_]*\\s*=\\s*Runtime\\.getRuntime\\(\\)\\.exec",
+        "example": "Process p = Runtime.getRuntime().exec(cmd);",
+        "confidence": "HIGH"
+      }
+    ],
+    "description": "Possible command injection detected.",
+    "recommendation": "Avoid executing OS commands with untrusted input. Validate input and use safer APIs."
+  },
+
+    {
+      "ruleId": "SG004",
+      "name": "Command Injection",
+      "severity": "CRITICAL",
+      "language": "PYTHON",
+      "detectors": [
+        {
+          "name": "os.system",
+          "regex": "os\\.system\\s*\\(",
+          "example": "os.system(command)",
+          "confidence": "HIGH"
+        },
+        {
+          "name": "os.popen",
+          "regex": "os\\.popen\\s*\\(",
+          "example": "os.popen(command)",
+          "confidence": "HIGH"
+        },
+        {
+          "name": "subprocess.run",
+          "regex": "subprocess\\.run\\s*\\(",
+          "example": "subprocess.run(command, shell=True)",
+          "confidence": "HIGH"
+        },
+        {
+          "name": "subprocess.call",
+          "regex": "subprocess\\.call\\s*\\(",
+          "example": "subprocess.call(command, shell=True)",
+          "confidence": "HIGH"
+        },
+        {
+          "name": "subprocess.Popen",
+          "regex": "subprocess\\.Popen\\s*\\(",
+          "example": "subprocess.Popen(command, shell=True)",
+          "confidence": "HIGH"
+        }
+      ],
+      "description": "Possible command injection detected.",
+      "recommendation": "Avoid executing shell commands with user-controlled input."
+    },
+  {
+    "ruleId": "SG004",
+    "name": "Command Injection",
+    "severity": "CRITICAL",
+    "language": "JAVASCRIPT",
+    "detectors": [
+      {
+        "name": "exec",
+        "regex": "exec\\s*\\(",
+        "example": "exec(command)",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "execSync",
+        "regex": "execSync\\s*\\(",
+        "example": "execSync(command)",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "spawn",
+        "regex": "spawn\\s*\\(",
+        "example": "spawn(command)",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "spawnSync",
+        "regex": "spawnSync\\s*\\(",
+        "example": "spawnSync(command)",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "fork",
+        "regex": "fork\\s*\\(",
+        "example": "fork(script)",
+        "confidence": "MEDIUM"
+      },
+      {
+        "name": "execFile",
+        "regex": "execFile\\s*\\(",
+        "example": "execFile(command)",
+        "confidence": "HIGH"
+      }
+    ],
+    "description": "Possible command injection detected.",
+    "recommendation": "Avoid executing system commands using untrusted input."
+  },
+
+      {
+      "ruleId": "SG004",
+      "name": "Command Injection",
+      "severity": "CRITICAL",
+      "language": "TYPESCRIPT",
+      "detectors": [
+        {
+          "name": "child_process.exec",
+          "regex": "child_process\\s*\\.\\s*exec\\s*\\(",
+          "example": "child_process.exec(command)",
+          "confidence": "HIGH"
+        },
+        {
+          "name": "child_process.execSync",
+          "regex": "child_process\\s*\\.\\s*execSync\\s*\\(",
+          "example": "child_process.execSync(command)",
+          "confidence": "HIGH"
+        },
+        {
+          "name": "child_process.spawn",
+          "regex": "child_process\\s*\\.\\s*spawn\\s*\\(",
+          "example": "child_process.spawn(command)",
+          "confidence": "HIGH"
+        },
+        {
+          "name": "Imported exec",
+          "regex": "import\\s*\\{[^}]*exec[^}]*\\}\\s*from\\s*[\"']child_process[\"']",
+          "example": "import { exec } from 'child_process'",
+          "confidence": "MEDIUM"
+        }
+      ],
+      "description": "Possible command injection detected.",
+      "recommendation": "Avoid executing operating system commands using untrusted input."
+    }
+]

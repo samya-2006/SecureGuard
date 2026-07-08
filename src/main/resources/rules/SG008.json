@@ -1,0 +1,250 @@
+[
+  {
+    "ruleId": "SG008",
+    "name": "XML External Entity (XXE)",
+    "severity": "HIGH",
+    "language": "JAVA",
+    "detectors": [
+      {
+        "name": "DocumentBuilderFactory",
+        "regex": "DocumentBuilderFactory\\.newInstance\\s*\\(",
+        "example": "DocumentBuilderFactory.newInstance();",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "SAXParserFactory",
+        "regex": "SAXParserFactory\\.newInstance\\s*\\(",
+        "example": "SAXParserFactory.newInstance();",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "XMLInputFactory",
+        "regex": "XMLInputFactory\\.newInstance\\s*\\(",
+        "example": "XMLInputFactory.newInstance();",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "SAXReader",
+        "regex": "new\\s+SAXReader\\s*\\(",
+        "example": "new SAXReader();",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "Unmarshaller",
+        "regex": "JAXBContext\\.newInstance\\s*\\(",
+        "example": "JAXBContext.newInstance(User.class);",
+        "confidence": "MEDIUM"
+      }
+    ],
+    "description": "XML parser detected that may be vulnerable to XXE if secure parser features are not enabled.",
+    "recommendation": "Disable DTD processing, disable external entities, and enable secure processing before parsing XML."
+  },
+
+  {
+    "ruleId": "SG008",
+    "name": "XML External Entity (XXE)",
+    "severity": "HIGH",
+    "language": "PYTHON",
+    "detectors": [
+      {
+        "name": "xml.etree.ElementTree",
+        "regex": "ElementTree\\.(parse|fromstring)\\s*\\(",
+        "example": "ElementTree.parse(file)",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "xml.dom.minidom",
+        "regex": "minidom\\.parse\\s*\\(",
+        "example": "minidom.parse(file)",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "xml.sax",
+        "regex": "xml\\.sax\\.make_parser\\s*\\(",
+        "example": "xml.sax.make_parser()",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "lxml",
+        "regex": "etree\\.(parse|fromstring)\\s*\\(",
+        "example": "etree.parse(file)",
+        "confidence": "HIGH"
+      }
+    ],
+    "description": "Potential XXE parser detected.",
+    "recommendation": "Use defusedxml or disable external entity processing."
+  },
+
+  {
+    "ruleId": "SG008",
+    "name": "XML External Entity (XXE)",
+    "severity": "HIGH",
+    "language": "JAVASCRIPT",
+    "detectors": [
+      {
+        "name": "xmldom",
+        "regex": "new\\s+DOMParser\\s*\\(",
+        "example": "new DOMParser()",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "xml2js",
+        "regex": "new\\s+Parser\\s*\\(",
+        "example": "new Parser()",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "fast-xml-parser",
+        "regex": "new\\s+XMLParser\\s*\\(",
+        "example": "new XMLParser()",
+        "confidence": "MEDIUM"
+      }
+    ],
+    "description": "Potential XXE parser detected.",
+    "recommendation": "Disable external entity resolution when parsing XML."
+  },
+
+  {
+    "ruleId": "SG008",
+    "name": "XML External Entity (XXE)",
+    "severity": "HIGH",
+    "language": "TYPESCRIPT",
+    "detectors": [
+      {
+        "name": "DOMParser",
+        "regex": "new\\s+DOMParser\\s*\\(",
+        "example": "new DOMParser()",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "xml2js",
+        "regex": "new\\s+Parser\\s*\\(",
+        "example": "new Parser()",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "fast-xml-parser",
+        "regex": "new\\s+XMLParser\\s*\\(",
+        "example": "new XMLParser()",
+        "confidence": "MEDIUM"
+      }
+    ],
+    "description": "Potential XXE parser detected.",
+    "recommendation": "Disable external entity processing."
+  },
+
+  {
+    "ruleId": "SG008",
+    "name": "XML External Entity (XXE)",
+    "severity": "HIGH",
+    "language": "C",
+    "detectors": [
+      {
+        "name": "libxml2",
+        "regex": "xml(ReadFile|ReadMemory|ParseFile)\\s*\\(",
+        "example": "xmlReadFile(file,NULL,0)",
+        "confidence": "HIGH"
+      }
+    ],
+    "description": "Potential XXE parser detected.",
+    "recommendation": "Disable entity expansion and DTD processing in libxml2."
+  },
+
+  {
+    "ruleId": "SG008",
+    "name": "XML External Entity (XXE)",
+    "severity": "HIGH",
+    "language": "CPP",
+    "detectors": [
+      {
+        "name": "TinyXML",
+        "regex": "Load(File|XML)\\s*\\(",
+        "example": "doc.LoadFile(file)",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "libxml2",
+        "regex": "xml(ReadFile|ReadMemory|ParseFile)\\s*\\(",
+        "example": "xmlReadFile(file,NULL,0)",
+        "confidence": "HIGH"
+      }
+    ],
+    "description": "Potential XXE parser detected.",
+    "recommendation": "Disable external entities and DTD processing."
+  },
+
+  {
+    "ruleId": "SG008",
+    "name": "XML External Entity (XXE)",
+    "severity": "HIGH",
+    "language": "CSHARP",
+    "detectors": [
+      {
+        "name": "XmlDocument",
+        "regex": "XmlDocument\\.Load\\s*\\(",
+        "example": "doc.Load(file)",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "XmlReader",
+        "regex": "XmlReader\\.Create\\s*\\(",
+        "example": "XmlReader.Create(file)",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "XDocument",
+        "regex": "XDocument\\.Load\\s*\\(",
+        "example": "XDocument.Load(file)",
+        "confidence": "MEDIUM"
+      }
+    ],
+    "description": "Potential XXE parser detected.",
+    "recommendation": "Disable DtdProcessing and XmlResolver."
+  },
+
+  {
+    "ruleId": "SG008",
+    "name": "XML External Entity (XXE)",
+    "severity": "HIGH",
+    "language": "GO",
+    "detectors": [
+      {
+        "name": "encoding/xml",
+        "regex": "xml\\.(NewDecoder|Unmarshal)\\s*\\(",
+        "example": "xml.NewDecoder(reader)",
+        "confidence": "HIGH"
+      }
+    ],
+    "description": "Potential XXE parser detected.",
+    "recommendation": "Validate XML input and avoid parsing untrusted XML."
+  },
+
+  {
+    "ruleId": "SG008",
+    "name": "XML External Entity (XXE)",
+    "severity": "HIGH",
+    "language": "PHP",
+    "detectors": [
+      {
+        "name": "simplexml_load_file",
+        "regex": "simplexml_load_file\\s*\\(",
+        "example": "simplexml_load_file(file)",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "DOMDocument::load",
+        "regex": "->load(XML)?\\s*\\(",
+        "example": "$dom->load($file)",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "XMLReader",
+        "regex": "XMLReader::open\\s*\\(",
+        "example": "XMLReader::open(file)",
+        "confidence": "MEDIUM"
+      }
+    ],
+    "description": "Potential XXE parser detected.",
+    "recommendation": "Disable external entity loading before parsing XML."
+  }
+]

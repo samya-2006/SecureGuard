@@ -1,0 +1,309 @@
+[
+  {
+    "ruleId": "SG006",
+    "name": "Weak Cryptography",
+    "severity": "HIGH",
+    "language": "JAVA",
+    "detectors": [
+      {
+        "name": "MD5",
+        "regex": "MessageDigest\\.getInstance\\s*\\(\\s*\"MD5\"\\s*\\)",
+        "example": "MessageDigest.getInstance(\"MD5\")",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "SHA-1",
+        "regex": "MessageDigest\\.getInstance\\s*\\(\\s*\"SHA-1\"\\s*\\)",
+        "example": "MessageDigest.getInstance(\"SHA-1\")",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "DES",
+        "regex": "Cipher\\.getInstance\\s*\\(\\s*\"DES\"\\s*\\)",
+        "example": "Cipher.getInstance(\"DES\")",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "DESede",
+        "regex": "Cipher\\.getInstance\\s*\\(\\s*\"DESede\"\\s*\\)",
+        "example": "Cipher.getInstance(\"DESede\")",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "RC4",
+        "regex": "Cipher\\.getInstance\\s*\\(\\s*\"RC4\"\\s*\\)",
+        "example": "Cipher.getInstance(\"RC4\")",
+        "confidence": "HIGH"
+      }
+    ],
+    "description": "Weak cryptographic algorithm detected.",
+    "recommendation": "Use AES-256, SHA-256, SHA-512 or stronger cryptographic algorithms."
+  },
+
+{
+"ruleId": "SG006",
+"name": "Weak Cryptography",
+"severity": "HIGH",
+"language": "PYTHON",
+"detectors": [
+{
+"name": "MD5",
+"regex": "hashlib\\.md5\\s*\\(",
+"example": "hashlib.md5(data)",
+"confidence": "HIGH"
+},
+{
+"name": "SHA1",
+"regex": "hashlib\\.sha1\\s*\\(",
+"example": "hashlib.sha1(data)",
+"confidence": "HIGH"
+},
+{
+"name": "DES",
+"regex": "DES\\.new\\s*\\(",
+"example": "DES.new(key)",
+"confidence": "HIGH"
+},
+{
+"name": "ARC4",
+"regex": "ARC4\\.new\\s*\\(",
+"example": "ARC4.new(key)",
+"confidence": "HIGH"
+}
+],
+"description": "Weak cryptographic algorithm detected.",
+"recommendation": "Use SHA-256, SHA-512 or AES encryption."
+},
+{
+"ruleId": "SG006",
+"name": "Weak Cryptography",
+"severity": "HIGH",
+"language": "JAVASCRIPT",
+"detectors": [
+{
+"name": "MD5",
+"regex": "createHash\\s*\\(\\s*[\"']md5[\"']\\s*\\)",
+"example": "crypto.createHash('md5')",
+"confidence": "HIGH"
+},
+{
+"name": "SHA1",
+"regex": "createHash\\s*\\(\\s*[\"']sha1[\"']\\s*\\)",
+"example": "crypto.createHash('sha1')",
+"confidence": "HIGH"
+},
+{
+"name": "DES",
+"regex": "createCipher\\s*\\(\\s*[\"']des[\"']",
+"example": "crypto.createCipher('des',key)",
+"confidence": "HIGH"
+},
+{
+"name": "RC4",
+"regex": "createCipher\\s*\\(\\s*[\"']rc4[\"']",
+"example": "crypto.createCipher('rc4',key)",
+"confidence": "HIGH"
+}
+],
+"description": "Weak cryptographic algorithm detected.",
+"recommendation": "Use SHA-256, SHA-512 or AES."
+},
+    {
+      "ruleId": "SG006",
+      "name": "Weak Cryptography",
+      "severity": "HIGH",
+      "language": "TYPESCRIPT",
+      "detectors": [
+        {
+          "name": "MD5",
+          "regex": "createHash\\s*\\(\\s*[\"']md5[\"']\\s*\\)",
+          "example": "crypto.createHash('md5')",
+          "confidence": "HIGH"
+        },
+        {
+          "name": "SHA1",
+          "regex": "createHash\\s*\\(\\s*[\"']sha1[\"']\\s*\\)",
+          "example": "crypto.createHash('sha1')",
+          "confidence": "HIGH"
+        },
+        {
+          "name": "DES",
+          "regex": "createCipher\\s*\\(\\s*[\"']des[\"']",
+          "example": "crypto.createCipher('des', key)",
+          "confidence": "HIGH"
+        },
+        {
+          "name": "RC4",
+          "regex": "createCipher\\s*\\(\\s*[\"']rc4[\"']",
+          "example": "crypto.createCipher('rc4', key)",
+          "confidence": "HIGH"
+        }
+      ],
+      "description": "Weak cryptographic algorithm detected.",
+      "recommendation": "Use AES-256 and SHA-256/SHA-512."
+    },
+  {
+    "ruleId": "SG006",
+    "name": "Weak Cryptography",
+    "severity": "HIGH",
+    "language": "C",
+    "detectors": [
+      {
+        "name": "MD5",
+        "regex": "\\bMD5\\s*\\(",
+        "example": "MD5(data,len,output)",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "SHA1",
+        "regex": "\\bSHA1\\s*\\(",
+        "example": "SHA1(data,len,output)",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "DES",
+        "regex": "\\bDES_",
+        "example": "DES_set_key()",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "RC4",
+        "regex": "\\bRC4\\s*\\(",
+        "example": "RC4(key,...);",
+        "confidence": "HIGH"
+      }
+    ],
+    "description": "Weak cryptographic algorithm detected.",
+    "recommendation": "Use modern cryptographic algorithms."
+  },
+  {
+    "ruleId": "SG006",
+    "name": "Weak Cryptography",
+    "severity": "HIGH",
+    "language": "CPP",
+    "detectors": [
+      {
+        "name": "MD5",
+        "regex": "\\bMD5\\s*\\(",
+        "example": "MD5(data,len,output)",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "SHA1",
+        "regex": "\\bSHA1\\s*\\(",
+        "example": "SHA1(data,len,output)",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "DES",
+        "regex": "\\bDES_",
+        "example": "DES_set_key()",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "RC4",
+        "regex": "\\bRC4\\s*\\(",
+        "example": "RC4(key,...);",
+        "confidence": "HIGH"
+      }
+    ],
+    "description": "Weak cryptographic algorithm detected.",
+    "recommendation": "Use AES-256 or stronger algorithms."
+  },
+  {
+    "ruleId": "SG006",
+    "name": "Weak Cryptography",
+    "severity": "HIGH",
+    "language": "CSHARP",
+    "detectors": [
+      {
+        "name": "MD5",
+        "regex": "MD5(Create)?\\s*\\(",
+        "example": "MD5.Create()",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "SHA1",
+        "regex": "SHA1(Create)?\\s*\\(",
+        "example": "SHA1.Create()",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "DESCryptoServiceProvider",
+        "regex": "DESCryptoServiceProvider",
+        "example": "new DESCryptoServiceProvider()",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "RC2CryptoServiceProvider",
+        "regex": "RC2CryptoServiceProvider",
+        "example": "new RC2CryptoServiceProvider()",
+        "confidence": "HIGH"
+      }
+    ],
+    "description": "Weak cryptographic algorithm detected.",
+    "recommendation": "Use SHA256 and Aes classes."
+  },
+  {
+    "ruleId": "SG006",
+    "name": "Weak Cryptography",
+    "severity": "HIGH",
+    "language": "GO",
+    "detectors": [
+      {
+        "name": "MD5",
+        "regex": "md5\\.New\\s*\\(",
+        "example": "md5.New()",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "SHA1",
+        "regex": "sha1\\.New\\s*\\(",
+        "example": "sha1.New()",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "DES",
+        "regex": "des\\.NewCipher\\s*\\(",
+        "example": "des.NewCipher(key)",
+        "confidence": "HIGH"
+      }
+    ],
+    "description": "Weak cryptographic algorithm detected.",
+    "recommendation": "Use SHA-256 and AES."
+  },
+  {
+    "ruleId": "SG006",
+    "name": "Weak Cryptography",
+    "severity": "HIGH",
+    "language": "PHP",
+    "detectors": [
+      {
+        "name": "MD5",
+        "regex": "\\bmd5\\s*\\(",
+        "example": "md5($password)",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "SHA1",
+        "regex": "\\bsha1\\s*\\(",
+        "example": "sha1($password)",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "DES",
+        "regex": "DES-ECB|DES-CBC|des",
+        "example": "openssl_encrypt(...,'DES-ECB',...)",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "RC4",
+        "regex": "RC4",
+        "example": "openssl_encrypt(...,'RC4',...)",
+        "confidence": "HIGH"
+      }
+    ],
+    "description": "Weak cryptographic algorithm detected.",
+    "recommendation": "Use password_hash(), SHA-256, SHA-512 and AES-256."
+  }
+]
