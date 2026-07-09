@@ -1,39 +1,55 @@
 # 🛡️ SecureGuard
 
 <p align="center">
-  <strong>A Cross-Language Static Application Security Testing (SAST) CLI</strong><br>
-  Detect common security vulnerabilities across multiple programming languages using regex-based detection and heuristic validation.
+
+![Java](https://img.shields.io/badge/Java-17-orange)
+![Version](https://img.shields.io/badge/version-v2.0.0-blue)
+![Platform](https://img.shields.io/badge/platform-Cross--Language-success)
+![CLI](https://img.shields.io/badge/interface-CLI-lightgrey)
+
+<strong>A Cross-Language Static Application Security Testing (SAST) CLI</strong>
+
+Detect common security vulnerabilities across multiple programming languages using regex-based detection and heuristic validation.
+
 </p>
 
 ---
 
-## Overview
+# Overview
 
 SecureGuard is a lightweight Java-based Static Application Security Testing (SAST) command-line tool that helps developers identify common security vulnerabilities directly from source code before deployment.
 
-It combines **regex-based detection** with **value-based heuristic validation** to identify insecure coding practices across multiple programming languages.
+Unlike traditional regex-only scanners, SecureGuard combines:
 
-SecureGuard is designed with a modular architecture, making it lightweight, extensible, and easy to maintain.
+- Regex-based detection
+- Value-based heuristic validation
+- Language-aware rule filtering
+
+to significantly reduce false positives while remaining lightweight and fast.
+
+SecureGuard currently supports **9 programming languages** and **10 built-in security rules**.
 
 ---
 
 # Features
 
-- Multi-language source code scanning
+- Cross-language source code scanning
 - Regex-based vulnerability detection
 - Value-based heuristic validation
 - Recursive project scanning
 - Language-aware rule filtering
 - Line number reporting
-- Severity-based reporting
-- Confidence level reporting
+- Severity reporting
+- Confidence reporting
 - Aggregated console reporting
 - Modular architecture
-- Executable standalone JAR
+- Standalone executable JAR
+- Offline scanning
+- Lightweight CLI
 
 ---
 
-# 🌍 Supported Languages
+# Supported Languages
 
 | Language | Supported |
 |-----------|-----------|
@@ -49,7 +65,7 @@ SecureGuard is designed with a modular architecture, making it lightweight, exte
 
 ---
 
-#  Supported Security Rules
+# Supported Security Rules
 
 | Rule ID | Vulnerability | Severity |
 |----------|---------------|----------|
@@ -58,15 +74,15 @@ SecureGuard is designed with a modular architecture, making it lightweight, exte
 | SG003 | SQL Injection | Critical |
 | SG004 | Command Injection | Critical |
 | SG005 | Path Traversal | High |
-| SG006 | Weak Cryptography | Medium |
-| SG007 | Insecure Random Number Generator | Medium |
+| SG006 | Weak Cryptography | High |
+| SG007 | Insecure Random Number Generator | High |
 | SG008 | XML External Entity (XXE) | High |
 | SG009 | Debug Mode Enabled | Medium |
-| SG010 | Insecure HTTP Communication | Medium |
+| SG010 | Insecure HTTP Communication | High |
 
 ---
 
-#  Architecture
+# Architecture
 
 ```
                     Main
@@ -96,8 +112,9 @@ SecureGuard is designed with a modular architecture, making it lightweight, exte
                   ConsoleReporter
 ```
 
-### Core Components
+Core Components
 
+- Main
 - RuleLoader
 - FileScanner
 - LanguageDetector
@@ -109,11 +126,13 @@ SecureGuard is designed with a modular architecture, making it lightweight, exte
 
 ---
 
-#  Project Structure
+# Project Structure
 
 ```
 SecureGuard/
 │
+├── .github/
+├── scripts/
 ├── src/
 │   ├── main/
 │   │   ├── java/
@@ -123,17 +142,17 @@ SecureGuard/
 │
 ├── pom.xml
 ├── README.md
-└── LICENSE (optional)
+└── LICENSE
 ```
 
 ---
 
-#  Getting Started
+# Getting Started
 
-## Clone the Repository
+## Clone
 
 ```bash
-git clone https://github.com/<samya-2006>/SecureGuard.git
+git clone https://github.com/samya-2006/SecureGuard.git
 ```
 
 ```bash
@@ -144,8 +163,8 @@ cd SecureGuard
 
 ## Requirements
 
-- Java 17 or later
-- Apache Maven 3.8+
+- Java 17+
+- Maven 3.8+
 
 ---
 
@@ -155,7 +174,7 @@ cd SecureGuard
 mvn clean package
 ```
 
-This generates:
+The executable JAR will be generated at:
 
 ```text
 target/SecureGuard.jar
@@ -163,7 +182,7 @@ target/SecureGuard.jar
 
 ---
 
-#  Running SecureGuard
+# Running SecureGuard
 
 Scan the current directory:
 
@@ -171,60 +190,46 @@ Scan the current directory:
 java -jar target/SecureGuard.jar .
 ```
 
-Scan a specific project:
+Scan another project:
 
 ```bash
-java -jar target/SecureGuard.jar "C:\Path\To\Project"
-```
-
-Example:
-
-```bash
-java -jar target/SecureGuard.jar "C:\Users\John\Desktop\SampleProject"
+java -jar target/SecureGuard.jar "C:\Projects\SampleApp"
 ```
 
 ---
 
-#  Sample Output
+# Sample Output
 
-```
+```text
 =========================================
-          SecureGuard v1.0.0
+          SecureGuard v2.0.0
 =========================================
 
 Cross-Language Security Scanner
 
 Initializing...
 
-=========================================
+========================================
 File : Test.java
-=========================================
+========================================
 
 Rule ID        : SG001
 Rule           : Hardcoded Credentials & Secrets
 Severity       : CRITICAL
-Recommendation : Remove hardcoded secrets and use secure configuration management.
-Error (Line 14): private static final String DB_PASS = "password123";
-Confidence     : HIGH
+Error (Line 10): private static final String PASSWORD = "Admin@123";
 
------------------------------------------
+----------------------------------------
 
 Rule ID        : SG003
 Rule           : SQL Injection
 Severity       : CRITICAL
-Recommendation : Use parameterized queries or prepared statements.
-Error (Line 26): stmt.executeQuery("SELECT * FROM users WHERE name='" + user + "'");
-Confidence     : HIGH
+Error (Line 22): stmt.executeQuery(query);
 
------------------------------------------
+----------------------------------------
 
-Scan Summary
-
-Files Scanned : 1
-Issues Found  : 2
+Files Scanned : 32
+Total Issues  : 26
 ```
-
-*(Sample output abbreviated for readability.)*
 
 ---
 
@@ -232,66 +237,73 @@ Issues Found  : 2
 
 - Lightweight and fast
 - Runs completely offline
-- Supports multiple programming languages
+- Cross-language scanning
 - Modular architecture
-- Easy to extend with additional rules
-- Suitable for secure coding education and code reviews
+- Heuristic validation reduces false positives
+- Easy to extend with new rules
+- Suitable for secure coding education
+- Useful during secure code reviews
 
 ---
 
-#  Roadmap
+# Roadmap
 
-## Version 1.0.0
+## ✅ v2.0.0
 
-- Multi-language scanning
+- Cross-language scanning
 - SG001–SG010 implemented
 - Regex-based detection
 - Value-based heuristic validation
-- Recursive directory scanning
-- Severity reporting
-- Confidence reporting
+- Recursive scanning
+- Language-aware rules
+- Multiline scanning
 - Executable standalone JAR
 
----
+## Planned
 
-##  Planned Features
+- Professional CLI
 
-- Professional CLI commands
-
-```bash
+```text
 secureguard scan .
-secureguard scan src/
+secureguard scan src
 secureguard --help
 secureguard --version
 ```
 
+- Rule filtering
 
+```text
+--rule SG003
+```
 
+- Severity filtering
 
-- JSON reports
-- SARIF export
-- Custom security rules
-- CI/CD with GitHub Actions
-- Package manager support (Winget, Scoop, Chocolatey, Homebrew)
+```text
+--severity HIGH
+```
+
+- Ignore file support (.secureguardignore)
+- Additional rule improvements
+- AST-based analysis (future major version)
 
 ---
 
-#  Contributing
+# Contributing
 
-Contributions, bug reports, feature requests, and pull requests are welcome.
+Contributions, feature requests, bug reports and pull requests are welcome.
 
-If you'd like to improve SecureGuard or add new security rules, feel free to fork the repository and submit a pull request.
+If you'd like to improve SecureGuard, feel free to fork the repository and submit a pull request.
 
 ---
 
-#  License
+# License
 
-A project license has not yet been specified.
+MIT License (recommended)
 
 ---
 
 # Support
 
-If you found SecureGuard useful, consider giving the repository a ⭐ on GitHub.
+If SecureGuard helped you, consider giving the repository a ⭐.
 
-Feedback and contributions are always appreciated.
+Feedback and contributions are always welcome.
