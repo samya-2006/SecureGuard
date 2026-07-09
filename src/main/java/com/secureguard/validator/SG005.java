@@ -12,50 +12,81 @@ public class SG005 implements ValueValidator {
                             int currentLine,
                             Matcher matcher) {
 
-        String current = lines.get(currentLine);
+        String currentRaw = lines.get(currentLine);
+        String current = currentRaw.toLowerCase();
 
-        String variable = ValueAnalyzer.extractVariable(current);
+        // Extract what's inside new File(...), Paths.get(...), etc.
+        String value = ValueAnalyzer.extractVariable(current);
 
-        // If path is passed directly
-        if (variable.isEmpty()) {
-
-            String lower = current.toLowerCase();
-
-            if (ValueAnalyzer.containsPathTraversal(lower)) {
-                return true;
-            }
-
-            return ValueAnalyzer.containsUserInput(lower);
-
-        }
-
-        // Find where the path variable was assigned
-        String assignment =
-                ValueAnalyzer.findAssignment(lines, variable);
-
-        if (assignment.isEmpty()) {
+        if (value.isBlank()) {
             return false;
         }
 
-        assignment = assignment.toLowerCase();
+        value = value.trim();
 
-        // ../  ..\
-        if (ValueAnalyzer.containsPathTraversal(assignment)) {
+        // Safe literals - fully hardcoded filenames with no dynamic part.
+        if (value.equals("\".\"")
+                || value.equals("\"..\"")
+                || value.equals("\"config.properties\"")
+                || value.equals("\"application.properties\"")) {
+            return false;
+        }
+
+        // Command-line arguments are expected in CLI applications by design.
+        if (value.startsWith("args[") || value.startsWith("argv[")) {
+            return false;
+        }
+
+        // Direct user-controlled input or a literal traversal payload.
+        if (ValueAnalyzer.containsUserInput(value)) {
             return true;
         }
 
-        // request.getParameter(), scanner.nextLine(), etc.
-        if (ValueAnalyzer.containsUserInput(assignment)) {
+        if (ValueAnalyzer.containsPathTraversal(value)) {
             return true;
         }
 
-        // "uploads/" + filename
-        if (ValueAnalyzer.containsConcatenation(assignment)) {
-            return true;
+        // A pure hardcoded string literal (no variables, no concatenation)
+        // has no dynamic component and can't be traversed by an attacker.
+        if (isPureStringLiteral(value)) {
+            return false;
         }
 
-        return false;
+        // Anything else - a bare variable/parameter, a field access, a
+        // concatenation, or a nested call - carries an unproven dynamic
+        // component. Try to trace it for extra context, but flag it either
+        // way since file APIs taking non-literal paths are the whole point
+        // of this rule.
+        if (value.matches("[a-zA-Z_][a-zA-Z0-9_.]*")) {
 
+            String assignment = ValueAnalyzer.findAssignment(lines, value);
+
+            if (!assignment.isBlank()) {
+                assignment = assignment.toLowerCase();
+
+                if (ValueAnalyzer.containsPathTraversal(assignment)) {
+                    return true;
+                }
+                if (ValueAnalyzer.containsUserInput(assignment)) {
+                    return true;
+                }
+                if (isPureStringLiteral(assignment.trim())) {
+                    return false;
+                }
+            }
+        }
+
+        // Dynamic/unresolved value with no proof of safety - flag it.
+        return true;
     }
 
+    private boolean isPureStringLiteral(String value) {
+        String v = value.trim();
+        if (v.endsWith(";")) {
+            v = v.substring(0, v.length() - 1).trim();
+        }
+        boolean isQuoted = (v.startsWith("\"") && v.endsWith("\""))
+                || (v.startsWith("'") && v.endsWith("'"));
+        return isQuoted && !v.contains("+");
+    }
 }

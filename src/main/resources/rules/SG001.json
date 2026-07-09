@@ -13,7 +13,7 @@
       },
       {
         "name": "Hardcoded Password",
-        "regex": "(?i)(password|passwd|pwd)\\s*=\\s*[\"'][^\"']+[\"']",
+        "regex": "(?i)(password|passwd|pwd|pass)\\s*=\\s*[\"'][^\"']+[\"']",
         "example": "String password = \"admin123\";",
         "confidence": "HIGH"
       },
@@ -59,7 +59,7 @@
       },
       {
         "name": "Hardcoded Password",
-        "regex": "(?i)(password|passwd|pwd)\\s*=\\s*[\"'][^\"']+[\"']",
+        "regex": "(?i)(password|passwd|pwd|pass)\\s*=\\s*[\"'][^\"']+[\"']",
         "example": "password = \"admin123\"",
         "confidence": "HIGH"
       },
@@ -105,7 +105,7 @@
       },
       {
         "name": "Hardcoded Password",
-        "regex": "(?i)(const|let|var)\\s+(password|passwd|pwd)\\s*=\\s*[\"'`][^\"'`]+[\"'`]",
+        "regex": "(?i)(const|let|var)\\s+(password|passwd|pwd|pass)\\s*=\\s*[\"'`][^\"'`]+[\"'`]",
         "example": "let password = \"admin123\";",
         "confidence": "HIGH"
       },
@@ -151,7 +151,7 @@
       },
       {
         "name": "Hardcoded Password",
-        "regex": "(?i)(const|let|var)\\s+(password|passwd|pwd)\\s*(:\\s*\\w+)?\\s*=\\s*[\"'`][^\"'`]+[\"'`]",
+        "regex": "(?i)(const|let|var)\\s+(password|passwd|pwd|pass)\\s*(:\\s*\\w+)?\\s*=\\s*[\"'`][^\"'`]+[\"'`]",
         "example": "let password: string = \"admin123\";",
         "confidence": "HIGH"
       },
@@ -241,7 +241,7 @@
       },
       {
         "name": "Hardcoded Password",
-        "regex": "(?i)(string|const\\s+string)\\s+(password|passwd|pwd)\\s*=\\s*\"[^\"]+\"",
+        "regex": "(?i)(string|const\\s+string)\\s+(password|passwd|pwd|pass)\\s*=\\s*\"[^\"]+\"",
         "example": "string password = \"admin123\";",
         "confidence": "HIGH"
       },
@@ -275,7 +275,7 @@
       },
       {
         "name": "Hardcoded Password",
-        "regex": "(?i)(password|passwd|pwd)\\s*(:=|=)\\s*\"[^\"]+\"",
+        "regex": "(?i)(password|passwd|pwd|pass)\\s*(:=|=)\\s*\"[^\"]+\"",
         "example": "password := \"admin123\"",
         "confidence": "HIGH"
       },
@@ -314,7 +314,7 @@
     },
     {
       "name": "Hardcoded Password",
-      "regex": "(?i)\\$(password|passwd|pwd)\\s*=\\s*[\"'][^\"']+[\"']",
+      "regex": "(?i)\\$(password|passwd|pwd|pass)\\s*=\\s*[\"'][^\"']+[\"']",
       "example": "$password = \"admin123\";",
       "confidence": "HIGH"
     },
@@ -354,7 +354,7 @@
       },
       {
         "name": "Hardcoded Password",
-        "regex": "(?i)\\$(password|passwd|pwd)\\s*=\\s*[\"'][^\"']+[\"']",
+        "regex": "(?i)\\$(password|passwd|pwd|pass)\\s*=\\s*[\"'][^\"']+[\"']",
         "example": "$password = \"admin123\";",
         "confidence": "HIGH"
       },

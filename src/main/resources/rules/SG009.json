@@ -7,13 +7,13 @@
     "detectors": [
       {
         "name": "Spring Boot Debug",
-        "regex": "debug\\s*=\\s*true",
+        "regex": "\\bdebug\\s*=\\s*true\\b",
         "example": "debug=true",
         "confidence": "HIGH"
       },
       {
         "name": "Spring Trace",
-        "regex": "trace\\s*=\\s*true",
+        "regex": "\\btrace\\s*=\\s*true\\b",
         "example": "trace=true",
         "confidence": "HIGH"
       },
@@ -30,14 +30,14 @@
         "confidence": "MEDIUM"
       },
       {
-        "name": "System.out.println",
-        "regex": "System\\.out\\.println\\s*\\(",
-        "example": "System.out.println(password)",
-        "confidence": "LOW"
+        "name": "Logger.debug",
+        "regex": "\\b(?:logger|log|LOGGER)\\.debug\\s*\\(",
+        "example": "logger.debug(\"Debug\")",
+        "confidence": "HIGH"
       },
       {
         "name": "printStackTrace",
-        "regex": "printStackTrace\\s*\\(",
+        "regex": "\\b\\w+\\.printStackTrace\\s*\\(",
         "example": "e.printStackTrace()",
         "confidence": "HIGH"
       }
@@ -55,31 +55,31 @@
       {
         "name": "Flask Debug",
         "regex": "app\\.run\\s*\\([^\\)]*debug\\s*=\\s*True",
-        "example": "app.run(debug=True)",
         "confidence": "HIGH"
       },
       {
         "name": "Django DEBUG",
-        "regex": "DEBUG\\s*=\\s*True",
-        "example": "DEBUG = True",
+        "regex": "\\bDEBUG\\s*=\\s*True\\b",
         "confidence": "HIGH"
       },
       {
         "name": "FastAPI Reload",
-        "regex": "reload\\s*=\\s*True",
-        "example": "uvicorn.run(..., reload=True)",
+        "regex": "\\breload\\s*=\\s*True\\b",
         "confidence": "MEDIUM"
       },
       {
-        "name": "print()",
-        "regex": "\\bprint\\s*\\(",
-        "example": "print(password)",
-        "confidence": "LOW"
+        "name": "logging.debug",
+        "regex": "logging\\.debug\\s*\\(",
+        "confidence": "HIGH"
+      },
+      {
+        "name": "logger.debug",
+        "regex": "\\b\\w+\\.debug\\s*\\(",
+        "confidence": "HIGH"
       },
       {
         "name": "traceback.print_exc",
         "regex": "traceback\\.print_exc\\s*\\(",
-        "example": "traceback.print_exc()",
         "confidence": "HIGH"
       }
     ],
@@ -109,11 +109,6 @@
         "confidence": "HIGH"
       },
       {
-        "name": "console.log",
-        "regex": "console\\.log\\s*\\(",
-        "confidence": "LOW"
-      },
-      {
         "name": "console.trace",
         "regex": "console\\.trace\\s*\\(",
         "confidence": "HIGH"
@@ -138,11 +133,6 @@
         "name": "console.debug",
         "regex": "console\\.debug\\s*\\(",
         "confidence": "HIGH"
-      },
-      {
-        "name": "console.log",
-        "regex": "console\\.log\\s*\\(",
-        "confidence": "LOW"
       }
     ],
     "description": "Debug configuration detected.",
@@ -164,11 +154,6 @@
         "name": "assert",
         "regex": "\\bassert\\s*\\(",
         "confidence": "MEDIUM"
-      },
-      {
-        "name": "printf Debug",
-        "regex": "printf\\s*\\(",
-        "confidence": "LOW"
       }
     ],
     "description": "Debug configuration detected.",
@@ -190,11 +175,6 @@
         "name": "assert",
         "regex": "\\bassert\\s*\\(",
         "confidence": "MEDIUM"
-      },
-      {
-        "name": "std::cout",
-        "regex": "std::cout\\s*<<",
-        "confidence": "LOW"
       }
     ],
     "description": "Debug configuration detected.",
@@ -221,11 +201,6 @@
         "name": "Debug.WriteLine",
         "regex": "Debug\\.WriteLine\\s*\\(",
         "confidence": "HIGH"
-      },
-      {
-        "name": "Console.WriteLine",
-        "regex": "Console\\.WriteLine\\s*\\(",
-        "confidence": "LOW"
       }
     ],
     "description": "Debug functionality detected.",
@@ -239,19 +214,14 @@
     "language": "GO",
     "detectors": [
       {
-        "name": "fmt.Println",
-        "regex": "fmt\\.Println\\s*\\(",
-        "confidence": "LOW"
-      },
-      {
-        "name": "fmt.Printf",
-        "regex": "fmt\\.Printf\\s*\\(",
-        "confidence": "LOW"
-      },
-      {
         "name": "log.Println",
         "regex": "log\\.Println\\s*\\(",
         "confidence": "MEDIUM"
+      },
+      {
+        "name": "log.Fatal",
+        "regex": "log\\.Fatal\\w*\\s*\\(",
+        "confidence": "HIGH"
       }
     ],
     "description": "Debug logging detected.",

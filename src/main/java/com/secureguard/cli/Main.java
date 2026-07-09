@@ -15,7 +15,7 @@ public class Main {
 
         System.out.println("""
                 =========================================
-                          SecureGuard v1.0.0
+                          SecureGuard v2.0.0
                 =========================================
                 Cross-Language Security Scanner
                 
