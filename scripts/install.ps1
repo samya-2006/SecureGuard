@@ -2,7 +2,7 @@
 $InstallDir = "$env:USERPROFILE\.secureguard"
 New-Item -ItemType Directory -Force -Path $InstallDir | Out-Null
 
-$JarSrc = Join-Path $PSScriptRoot "..\target\SecureGuard.jar"
+$JarSrc = Join-Path $PSScriptRoot "SecureGuard.jar"
 Copy-Item $JarSrc -Destination "$InstallDir\SecureGuard.jar" -Force
 
 $WrapperPath = "$InstallDir\secureguard.cmd"
