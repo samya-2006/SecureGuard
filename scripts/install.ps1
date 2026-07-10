@@ -17,4 +17,13 @@ if ($UserPath -notlike "*$InstallDir*") {
     Write-Host "Added $InstallDir to your user PATH. Restart your terminal."
 }
 
-Write-Host "Installed. Try: secureguard ."
+Write-Host ""
+Write-Host "SecureGuard installed successfully!"
+Write-Host ""
+Write-Host "Examples:"
+Write-Host "  secureguard scan ."
+Write-Host "  secureguard scan C:\Projects\Demo"
+Write-Host "  secureguard --help"
+Write-Host "  secureguard --version"
+Write-Host ""
+Write-Host "Restart your terminal if the command is not recognized."
