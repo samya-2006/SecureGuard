@@ -3,7 +3,7 @@
 <p align="center">
 
 ![Java](https://img.shields.io/badge/Java-17-orange)
-![Version](https://img.shields.io/badge/version-v2.0.0-blue)
+![Version](https://img.shields.io/badge/version-v2.1.0-blue)
 ![Platform](https://img.shields.io/badge/platform-Cross--Language-success)
 ![CLI](https://img.shields.io/badge/interface-CLI-lightgrey)
 
@@ -25,7 +25,7 @@ Unlike traditional regex-only scanners, SecureGuard combines:
 - Value-based heuristic validation
 - Language-aware rule filtering
 
-to significantly reduce false positives while remaining lightweight and fast.
+to reduce false positives while remaining lightweight, fast, and easy to use.
 
 SecureGuard currently supports **9 programming languages** and **10 built-in security rules**.
 
@@ -46,6 +46,36 @@ SecureGuard currently supports **9 programming languages** and **10 built-in sec
 - Standalone executable JAR
 - Offline scanning
 - Lightweight CLI
+- Installable command-line interface
+- Global `secureguard` command
+
+---
+
+# Quick Usage
+
+Scan the current directory:
+
+```bash
+secureguard scan .
+```
+
+Scan another project:
+
+```bash
+secureguard scan "C:\Projects\MyApplication"
+```
+
+Display help:
+
+```bash
+secureguard --help
+```
+
+Display version:
+
+```bash
+secureguard --version
+```
 
 ---
 
@@ -112,7 +142,7 @@ SecureGuard currently supports **9 programming languages** and **10 built-in sec
                   ConsoleReporter
 ```
 
-Core Components
+## Core Components
 
 - Main
 - RuleLoader
@@ -149,13 +179,10 @@ SecureGuard/
 
 # Getting Started
 
-## Clone
+## Clone the Repository
 
 ```bash
 git clone https://github.com/samya-2006/SecureGuard.git
-```
-
-```bash
 cd SecureGuard
 ```
 
@@ -163,8 +190,8 @@ cd SecureGuard
 
 ## Requirements
 
-- Java 17+
-- Maven 3.8+
+- Java 17 or later
+- Apache Maven 3.8+
 
 ---
 
@@ -174,7 +201,7 @@ cd SecureGuard
 mvn clean package
 ```
 
-The executable JAR will be generated at:
+This generates:
 
 ```text
 target/SecureGuard.jar
@@ -182,18 +209,56 @@ target/SecureGuard.jar
 
 ---
 
+## Install the CLI (Windows)
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\install.ps1
+```
+
+Restart your terminal after installation.
+
+---
+
 # Running SecureGuard
+
+Navigate to the project you want to scan:
+
+```bash
+cd C:\Path\To\Your\Project
+```
 
 Scan the current directory:
 
 ```bash
-java -jar target/SecureGuard.jar .
+secureguard scan .
 ```
 
-Scan another project:
+Scan another project directly:
 
 ```bash
-java -jar target/SecureGuard.jar "C:\Projects\SampleApp"
+secureguard scan "C:\Projects\SampleApp"
+```
+
+Display help:
+
+```bash
+secureguard --help
+```
+
+Display version:
+
+```bash
+secureguard --version
+```
+
+---
+
+## Run Without Installation
+
+You can also execute SecureGuard directly:
+
+```bash
+java -jar target/SecureGuard.jar scan .
 ```
 
 ---
@@ -202,7 +267,7 @@ java -jar target/SecureGuard.jar "C:\Projects\SampleApp"
 
 ```text
 =========================================
-          SecureGuard v2.0.0
+          SecureGuard v2.1.0
 =========================================
 
 Cross-Language Security Scanner
@@ -248,27 +313,22 @@ Total Issues  : 26
 
 # Roadmap
 
-## ✅ v2.0.0
+## ✅ v2.1.0
 
 - Cross-language scanning
 - SG001–SG010 implemented
 - Regex-based detection
 - Value-based heuristic validation
-- Recursive scanning
-- Language-aware rules
+- Recursive project scanning
+- Language-aware rule filtering
 - Multiline scanning
-- Executable standalone JAR
+- Installable CLI
+- Global `secureguard` command
+- `--help`
+- `--version`
+- Standalone executable JAR
 
 ## Planned
-
-- Professional CLI
-
-```text
-secureguard scan .
-secureguard scan src
-secureguard --help
-secureguard --version
-```
 
 - Rule filtering
 
@@ -282,23 +342,12 @@ secureguard --version
 --severity HIGH
 ```
 
-- Ignore file support (.secureguardignore)
+- `.secureguardignore` support
+- JSON report generation
+- SARIF export
 - Additional rule improvements
 - AST-based analysis (future major version)
 
----
-
-# Contributing
-
-Contributions, feature requests, bug reports and pull requests are welcome.
-
-If you'd like to improve SecureGuard, feel free to fork the repository and submit a pull request.
-
----
-
-# License
-
-MIT License (recommended)
 
 ---
 
