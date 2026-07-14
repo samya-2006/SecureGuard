@@ -3,18 +3,22 @@ package com.secureguard.report;
 import com.secureguard.model.Issue;
 
 import java.util.List;
-
+import com.secureguard.report.HtmlReporter;
 public class ConsoleReporter {
 
     public void printReport(List<Issue> issues,
-                            int filesScanned){
+                            int filesScanned) {
 
-        System.out.println("\n========================================");
+        System.out.println(
+                "[DEBUG] HTML reporter finished"
+        );
+
+        System.out.println("\n====================================");
         System.out.println("        SecureGuard Scan Report");
-        System.out.println("========================================");
+        System.out.println("====================================");
 
         if (issues.isEmpty()) {
-            System.out.println("✔ No security issues found.");
+            System.out.println("✓ No security issues found.");
             return;
         }
         int critical = 0;

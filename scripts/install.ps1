@@ -1,52 +1,80 @@
 $ErrorActionPreference = "Stop"
 
-$ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
-$ProjectDir = Split-Path -Parent $ScriptDir
+$ProjectRoot = Split-Path -Parent $PSScriptRoot
+$JarSrc = Join-Path $ProjectRoot "target\SecureGuard.jar"
 
-$JarSrc = Join-Path $ProjectDir "target\SecureGuard.jar"
 $InstallDir = Join-Path $env:USERPROFILE ".secureguard"
-$JarDest = Join-Path $InstallDir "SecureGuard.jar"
-$CmdFile = Join-Path $InstallDir "secureguard.cmd"
+$BinDir = Join-Path $InstallDir "bin"
 
+Write-Host ""
 Write-Host "Installing SecureGuard..."
-
-if (-not (Get-Command java -ErrorAction SilentlyContinue)) {
-    Write-Host "ERROR: Java is not installed or not available in PATH."
-    Write-Host "Install Java 17 or later before installing SecureGuard."
-    exit 1
-}
+Write-Host ""
 
 if (-not (Test-Path $JarSrc)) {
-    Write-Host "ERROR: SecureGuard.jar was not found."
+    Write-Host "SecureGuard.jar was not found at:"
+    Write-Host $JarSrc
     Write-Host ""
-    Write-Host "Build SecureGuard first using:"
-    Write-Host "mvn clean package"
+    Write-Host "Run 'mvn clean package' before installing."
     exit 1
 }
 
-New-Item -ItemType Directory -Force -Path $InstallDir | Out-Null
+New-Item `
+    -ItemType Directory `
+    -Force `
+    -Path $InstallDir | Out-Null
 
-Copy-Item $JarSrc -Destination $JarDest -Force
+New-Item `
+    -ItemType Directory `
+    -Force `
+    -Path $BinDir | Out-Null
 
-@"
+Copy-Item `
+    $JarSrc `
+    -Destination (Join-Path $InstallDir "SecureGuard.jar") `
+    -Force
+
+$LauncherPath = Join-Path $BinDir "secureguard.cmd"
+
+$Launcher = @'
 @echo off
-java -jar "%USERPROFILE%\.secureguard\SecureGuard.jar" %*
-"@ | Set-Content $CmdFile
+java -cp "%USERPROFILE%\.secureguard\SecureGuard.jar" com.secureguard.cli.SecureGuardCli %*
+'@
 
-$UserPath = [Environment]::GetEnvironmentVariable("Path", "User")
+Set-Content `
+    -Path $LauncherPath `
+    -Value $Launcher `
+    -Encoding ASCII
 
-if ($UserPath -notlike "*$InstallDir*") {
+$UserPath = [Environment]::GetEnvironmentVariable(
+    "Path",
+    "User"
+)
+
+if ($UserPath -notlike "*$BinDir*") {
+
+    $NewPath = if ([string]::IsNullOrWhiteSpace($UserPath)) {
+        $BinDir
+    } else {
+        "$UserPath;$BinDir"
+    }
+
     [Environment]::SetEnvironmentVariable(
         "Path",
-        "$UserPath;$InstallDir",
+        $NewPath,
         "User"
     )
+
+    Write-Host ""
+    Write-Host "Added SecureGuard to user PATH."
 }
 
 Write-Host ""
 Write-Host "SecureGuard installed successfully!"
 Write-Host ""
-Write-Host "Restart your terminal and run:"
+Write-Host "Examples:"
+Write-Host "  secureguard scan ."
+Write-Host "  secureguard scan C:\Projects\Demo"
+Write-Host "  secureguard --help"
+Write-Host "  secureguard --version"
 Write-Host ""
-Write-Host "secureguard --version"
-Write-Host "secureguard scan ."
+Write-Host "Restart your terminal if the command is not recognized."

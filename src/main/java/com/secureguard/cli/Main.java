@@ -6,12 +6,14 @@ import com.secureguard.model.Rule;
 import com.secureguard.report.ConsoleReporter;
 import com.secureguard.scanner.FileScanner;
 import com.secureguard.scanner.RuleEngine;
-
+import com.secureguard.report.HtmlReporter;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
+
+    private static final String VERSION = "2.0.0";
 
     public static void main(String[] args) {
 
@@ -20,100 +22,185 @@ public class Main {
             return;
         }
 
-        switch (args[0].toLowerCase()) {
+        String command = args[0];
+
+        switch (command.toLowerCase()) {
 
             case "scan":
-
-                runScan(args);
-
+                handleScan(args);
                 break;
 
             case "--help":
             case "-h":
-
+            case "help":
                 printHelp();
-
                 break;
 
             case "--version":
             case "-v":
-
-                System.out.println("SecureGuard v2.1.0");
-
+            case "version":
+                printVersion();
                 break;
 
             default:
+                System.err.println(
+                        "Unknown command: " + command
+                );
 
-                System.out.println("Unknown command: " + args[0]);
-                System.out.println();
-                printHelp();
+                System.err.println(
+                        "Run 'secureguard --help' for usage."
+                );
 
+                System.exit(1);
         }
-
     }
 
-    private static void runScan(String[] args) {
 
-        System.out.println("""
-                =========================================
-                          SecureGuard v2.1.0
-                =========================================
-                Cross-Language Security Scanner
+    private static void handleScan(String[] args) {
 
-                Initializing...
-                """);
+        if (args.length < 2) {
 
-        RuleLoader ruleLoader = new RuleLoader();
-        List<Rule> rules = ruleLoader.loadRules();
+            System.err.println(
+                    "Error: Scan path is required."
+            );
 
-        FileScanner fileScanner = new FileScanner();
-        RuleEngine ruleEngine = new RuleEngine();
+            System.err.println(
+                    "Usage: secureguard scan <path>"
+            );
 
-        File scanFolder;
-
-        if (args.length >= 2) {
-            scanFolder = new File(args[1]);
-        } else {
-            scanFolder = new File(".");
+            return;
         }
 
-        List<File> files = fileScanner.scanProject(scanFolder);
+        String scanPath = args[1];
 
-        List<Issue> allIssues = new ArrayList<>();
+        File target = new File(scanPath);
 
-        for (File file : files) {
-            allIssues.addAll(ruleEngine.scanFile(file, rules));
+        if (!target.exists()) {
+
+            System.err.println(
+                    "Error: Path does not exist: "
+                            + target.getAbsolutePath()
+            );
+
+            return;
         }
 
-        ConsoleReporter reporter = new ConsoleReporter();
+        try {
 
-        reporter.printReport(allIssues, files.size());
+            RuleLoader ruleLoader = new RuleLoader();
+
+            List<Rule> rules =
+                    ruleLoader.loadRules();
+
+
+            FileScanner fileScanner =
+                    new FileScanner();
+
+            List<File> files =
+                    fileScanner.scanProject(target);
+
+
+            RuleEngine ruleEngine =
+                    new RuleEngine();
+
+            List<Issue> allIssues =
+                    new ArrayList<>();
+
+
+            for (File file : files) {
+
+                List<Issue> fileIssues =
+                        ruleEngine.scanFile(
+                                file,
+                                rules
+                        );
+
+                allIssues.addAll(fileIssues);
+            }
+
+            ConsoleReporter consoleReporter =
+                    new ConsoleReporter();
+
+
+            HtmlReporter htmlReporter =
+                    new HtmlReporter();
+
+
+            consoleReporter.printReport(
+                    allIssues,
+                    files.size()
+            );
+
+
+            String reportPath =
+                    System.getProperty("user.dir")
+                            + File.separator
+                            + "secureguard-report.html";
+
+
+            htmlReporter.generate(
+                    allIssues,
+                    reportPath
+            );
+
+
+        } catch (Exception e) {
+
+            System.err.println(
+                    "SecureGuard scan failed: "
+                            + e.getMessage()
+            );
+
+            e.printStackTrace();
+
+            System.exit(1);
+        }
     }
+
 
     private static void printHelp() {
 
-        System.out.println("""
-                
-                SecureGuard CLI
-                
-                Usage:
-                
-                  secureguard scan <path>
-                
-                Commands:
-                
-                  scan        Scan a project
-                  --help      Show help
-                  --version   Show version
-                
-                Examples:
-                
-                  secureguard scan .
-                  secureguard scan src
-                  secureguard scan C:\\Projects\\Demo
-                
-                """);
+        System.out.println();
+        System.out.println("SecureGuard v" + VERSION);
+        System.out.println(
+                "CLI-Based Secure Development Assistant"
+        );
 
+        System.out.println();
+
+        System.out.println("Usage:");
+        System.out.println(
+                "  secureguard scan <path>"
+        );
+
+        System.out.println(
+                "  secureguard --help"
+        );
+
+        System.out.println(
+                "  secureguard --version"
+        );
+
+        System.out.println();
+
+        System.out.println("Examples:");
+
+        System.out.println(
+                "  secureguard scan ."
+        );
+
+        System.out.println(
+                "  secureguard scan C:\\Projects\\Demo"
+        );
+
+        System.out.println();
     }
 
+
+    private static void printVersion() {
+
+        System.out.println(
+                "SecureGuard v" + VERSION
+        );
+    }
 }
