@@ -3,7 +3,7 @@
 <p align="center">
 
 ![Java](https://img.shields.io/badge/Java-17-orange)
-![Version](https://img.shields.io/badge/version-v2.1.0-blue)
+![Version](https://img.shields.io/badge/version-v2.2.0-blue)
 ![Platform](https://img.shields.io/badge/platform-Cross--Language-success)
 ![CLI](https://img.shields.io/badge/interface-CLI-lightgrey)
 
@@ -44,6 +44,8 @@ SecureGuard currently supports **9 programming languages** and **10 built-in sec
 - Confidence reporting
 - Aggregated console reporting
 - Offline scanning
+- Actionable remediation recommendations
+- Automatic HTML scan report generation
 - Standalone executable JAR
 - Installable CLI
 - Global `secureguard` command
@@ -153,6 +155,8 @@ java -jar .\SecureGuard.jar scan "C:\Projects\SampleApp"
 ```powershell
 java -jar .\SecureGuard.jar scan "C:\Projects\SampleApp\Test.java"
 ```
+
+After scanning, SecureGuard displays the findings in the console and automatically generates an HTML scan report.
 
 ---
 
@@ -300,6 +304,8 @@ secureguard scan "C:\Projects\SampleApp"
 
 > `secureguard scan .` scans the directory where the terminal is currently opened.
 
+After scanning, SecureGuard displays the findings in the console and automatically generates an HTML scan report.
+
 ---
 
 # Method 3 — Build and Run From Source
@@ -367,6 +373,7 @@ Example:
 ```powershell
 java -jar .\target\SecureGuard.jar scan "C:\Projects\SampleApp"
 ```
+After scanning, SecureGuard displays the findings in the console and automatically generates an HTML scan report.
 
 > Avoid using `scan .` inside the SecureGuard repository unless you intentionally want to scan SecureGuard's own source and test files.
 
@@ -420,7 +427,7 @@ java -jar .\target\SecureGuard.jar scan "C:\Projects\SampleApp"
 
 ```text
 =========================================
-          SecureGuard v2.1.0
+          SecureGuard v2.2.0
 =========================================
 
 Cross-Language Security Scanner
@@ -436,14 +443,17 @@ File : VulnerableApp.java
 Rule ID        : SG001
 Rule           : Hardcoded Credentials & Secrets
 Severity       : CRITICAL
+Recommendation : Move secrets to environment variables or a secure secret manager.
 Error (Line 7) : private static final String PASSWORD = "Admin@123";
-
+Confidence     : HIGH
 -----------------------------------------
 
 Rule ID        : SG003
 Rule           : SQL Injection
 Severity       : CRITICAL
+Recommendation : Use parameterized queries.
 Error (Line 16): stmt.executeQuery(query);
+Confidence     : HIGH
 
 -----------------------------------------
 
@@ -451,8 +461,10 @@ Files Scanned : 1
 Total Issues  : 2
 ```
 
----
+In addition to the console output, SecureGuard automatically generates an HTML scan report to provide a structured 
+view of the detected vulnerabilities and remediation recommendations.
 
+```
 # Architecture
 
 ```text
@@ -532,7 +544,7 @@ SecureGuard/
 
 # Roadmap
 
-## ✅ v2.1.0
+## ✅ v2.2.0
 
 - Cross-language scanning
 - SG001–SG010 implemented
@@ -542,6 +554,8 @@ SecureGuard/
 - Language-aware rule filtering
 - Multiline scanning
 - Installable CLI
+- Actionable remediation recommendations
+- Automatic HTML scan report generation
 - Global `secureguard` command
 - `--help`
 - `--version`
